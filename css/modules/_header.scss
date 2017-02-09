@@ -1,0 +1,148 @@
+.main-menu {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background: rgba($gray-darker, .85);
+  transition: box-shadow .6s;
+
+  a {
+    color: $smoke;
+    transition: all .3s;
+
+    &:hover {
+      color: $yellow;
+      text-decoration: none;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .menu-item {
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 18px 10px;
+    display: block;
+    border-width: 0;
+    border-style: solid;
+    border-color: rgba($gray-darker, .5);
+    border-top-width: 1px;
+
+    &:hover {
+      background-color: rgba($gray-darker, .3);
+    }
+  }
+
+  .list-menu {
+    background: rgba($gray-darker, .85);
+    bottom: 0;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    max-height: 0;
+    overflow-y: scroll;
+    position: fixed;
+    right: 0;
+    transition: max-height .3s;
+    top: 60px;
+
+    & > li {
+      display: block;
+      margin: 0;
+    }
+
+    @media (min-width: 1099px) {
+      max-height: none;
+      float: right;
+
+      & > li {
+        float: left;
+      }
+    }
+  }
+
+  &.menu-open {
+    box-shadow: 0 3px rgba(0,0,0,.4);
+
+    .list-menu {
+      max-height: 1000px;
+    }
+  }
+
+  @media (min-width: 1099px) {
+    box-shadow: none;
+
+    .menu-item-wp:first-child a {
+      border-left-width: 1px;
+    }
+
+    .menu-item {
+      border-top-width: 0;
+      border-right-width: 1px;
+    }
+
+    .list-menu {
+      background: none;
+      float: right;
+      overflow: hidden;
+      position: static;
+
+      & > li {
+        float: left;
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .container {
+      width: 100%;
+    }
+  }
+}
+
+.menu-logo {
+  margin: 8px auto;
+  width: 50px;
+  height: 44px;
+  background: url(../images/logo-mini.png) center center no-repeat;
+
+  @media (min-width: 1099px) {
+    float: left;
+    margin: 8px 0;
+  }
+}
+
+.menu-opener {
+  border: 1px solid $smoke;
+  border-radius: 2px;
+  padding: 3px 6px;
+  position: absolute;
+  left: 5px;
+  top: 12px;
+  z-index: 200;
+
+  @media (min-width: 1099px) {
+    display: none;
+  }
+}
+
+.hamburger {
+  position: relative;
+  bottom: -2px;
+  display: inline-block;
+  width: 20px;
+  height: 15px;
+  margin-right: 8px;
+  border-top: 3px solid $smoke;
+  border-bottom: 3px solid $smoke;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 0px;
+    width: 100%;
+    border-top: 3px solid $smoke;
+  }
+}
