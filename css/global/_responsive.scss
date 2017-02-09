@@ -1,0 +1,33 @@
+/* Responsive utilities
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (max-width: $tablet - 1px) {
+  .mobile-visible { display: block; }
+  .mobile-hidden, .tablet-visible, .desktop-visible { display: none !important; }
+  .block-xs {
+    display: block !important;
+    width: 100%;
+  }
+}
+
+@media (min-width: $tablet) and (max-width: $desktop - 1px) {
+  .tabled-visible { display: block; }
+  .tablet-hidden, .mobile-visible, .desktop-visible { display: none !important; }
+}
+
+
+@media (min-width: $desktop) {
+  .desktop-visible { display: block; }
+  .desktop-hidden, .mobile-visible, .tablet-visible { display: none !important; }
+}
+
+// MEDIA QUERIES
+/* Larger than mobile */
+@media (min-width: 400px) {}
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+/* Larger than tablet */
+@media (min-width: 750px) {}
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
