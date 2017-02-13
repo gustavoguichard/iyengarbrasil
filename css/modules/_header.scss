@@ -52,7 +52,7 @@
       margin: 0;
     }
 
-    @media (min-width: 1099px) {
+    @media (min-width: 1100px) {
       max-height: none;
       float: right;
 
@@ -70,7 +70,7 @@
     }
   }
 
-  @media (min-width: 1099px) {
+  @media (min-width: 1100px) {
     box-shadow: none;
 
     .menu-item-wp:first-child a {
@@ -94,7 +94,7 @@
     }
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1099px) {
     .container {
       width: 100%;
     }
@@ -107,7 +107,7 @@
   height: 44px;
   background: url(../images/logo-mini.png) center center no-repeat;
 
-  @media (min-width: 1099px) {
+  @media (min-width: 1100px) {
     float: left;
     margin: 8px 0;
   }
@@ -122,7 +122,7 @@
   top: 12px;
   z-index: 200;
 
-  @media (min-width: 1099px) {
+  @media (min-width: 1100px) {
     display: none;
   }
 }
