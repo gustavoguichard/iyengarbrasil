@@ -1,8 +1,10 @@
 body {
+  background-color: $ice;
   color: $gray-darker;
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding-top: $header-height;
 
   * {
     box-sizing: border-box;
@@ -28,6 +30,7 @@ img {
 
 .main-content {
   position: relative;
+  padding-bottom: 1em;
 }
 
 .hidden {

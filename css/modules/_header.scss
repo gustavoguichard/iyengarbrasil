@@ -1,8 +1,11 @@
+$logo-height: 44px;
+$menu-font: 15px;
+
 .main-menu {
   position: fixed;
   top: 0;
   z-index: 100;
-  background: rgba($gray-darker, .85);
+  background: rgba(#222, .85);
   transition: box-shadow .6s;
 
   a {
@@ -20,13 +23,13 @@
   }
 
   .menu-item {
-    font-size: 15px;
+    font-size: $menu-font;
     text-transform: uppercase;
-    padding: 18px 10px;
+    padding: (($header-height - ($menu-font + 9px)) / 2) 10px;
     display: block;
     border-width: 0;
     border-style: solid;
-    border-color: rgba($gray-darker, .5);
+    border-color: rgba(black, .2);
     border-top-width: 1px;
 
     &:hover {
@@ -35,7 +38,7 @@
   }
 
   .list-menu {
-    background: rgba($gray-darker, .85);
+    background: rgba($gray-darker, .9);
     bottom: 0;
     left: 0;
     list-style: none;
@@ -44,8 +47,8 @@
     overflow-y: scroll;
     position: fixed;
     right: 0;
-    transition: max-height .3s;
-    top: 60px;
+    transition: max-height .6s;
+    top: $header-height;
 
     & > li {
       display: block;
@@ -102,14 +105,15 @@
 }
 
 .menu-logo {
-  margin: 8px auto;
+  margin: (($header-height - $logo-height) / 2) auto;
   width: 50px;
-  height: 44px;
+  height: $logo-height;
   background: url(../images/logo-mini.png) center center no-repeat;
+  background-size: cover;
 
   @media (min-width: 1100px) {
     float: left;
-    margin: 8px 0;
+    margin: (($header-height - $logo-height) / 2) 0;
   }
 }
 
@@ -131,7 +135,7 @@
   position: relative;
   bottom: -2px;
   display: inline-block;
-  width: 20px;
+  width: $header-height / 3;
   height: 15px;
   margin-right: 8px;
   border-top: 3px solid $smoke;

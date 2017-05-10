@@ -1,0 +1,32 @@
+.sched-tb {
+  border-spacing: 6px;
+  border-collapse: separate;
+  border: 0 solid !important;
+
+  thead th {
+    background-color: #422111;
+    font-size: 1.4em;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  thead th, tbody td {
+    border: 0 solid;
+    color: white;
+    padding: 6px 15px;
+    text-align: center;
+    vertical-align: middle;
+
+    &:empty {
+      background-color: transparent;
+    }
+  }
+
+  td:nth-child(even) {
+    background-color: #692F17;
+  }
+
+  td:nth-child(odd) {
+    background-color: #834b33;
+  }
+}

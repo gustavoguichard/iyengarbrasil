@@ -74,3 +74,13 @@ li {
 
 .t-faded { color: $gray; }
 .upper { text-transform: uppercase; }
+
+
+// Titles
+.header-title {
+  border: 3px solid $orange;
+  color: $orange;
+  display: inline-block;
+  font-weight: 700;
+  padding: .5em 1em;
+}
