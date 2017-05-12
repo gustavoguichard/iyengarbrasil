@@ -1,9 +1,14 @@
 .sct-parallax {
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   padding-bottom: 8em;
   padding-top: 8em;
+
+  @media (min-width: $tablet + 1) {
+    &, .slider-img {
+      background-attachment: fixed;
+    }
+  }
 }
 
 .sct-slideshow {
