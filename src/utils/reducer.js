@@ -4,6 +4,7 @@ export const initState = {
   windowWidth: 0,
   windowHeight: 0,
   menuOpen: false,
+  menuVisible: true,
   windowY: 0,
   ticks: 0,
 }
@@ -21,6 +22,16 @@ export default (state = initState, action) => {
       return {
         ...state,
         menuOpen: !state.menuOpen,
+      }
+    case 'SHOW_MENU':
+      return {
+        ...state,
+        menuVisible: true
+      }
+    case 'HIDE_MENU':
+      return {
+        ...state,
+        menuVisible: false,
       }
     case 'WINDOW_SCROLLED':
       return {

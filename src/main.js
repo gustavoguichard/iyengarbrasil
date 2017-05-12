@@ -4,6 +4,7 @@ import { createStore } from './utils/redux'
 import reducer from './utils/reducer'
 import BodyControls from './components/BodyControls'
 import MainMenu from './components/MainMenu'
+import MainHeader from './components/MainHeader'
 import Slider from './components/Slider'
 
 class Site {
@@ -25,6 +26,7 @@ const COMPONENTS = {
   'body': BodyControls,
   '.main-menu': MainMenu,
   '.sct-slideshow': Slider,
+  '.main-header': MainHeader,
   // '.menu-link, .menu-shadow, [data-open-menu]': MenuLink,
 }
 

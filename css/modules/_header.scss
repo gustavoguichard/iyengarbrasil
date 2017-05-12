@@ -3,10 +3,15 @@ $menu-font: 15px;
 
 .main-menu {
   position: fixed;
-  top: 0;
+  top: -$header-height;
   z-index: 100;
   background: rgba(#222, .85);
   transition: box-shadow .6s;
+  transition: top .3s;
+
+  &.menu-visible {
+    top: 0;
+  }
 
   a {
     color: $smoke;
