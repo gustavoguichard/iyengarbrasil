@@ -1,0 +1,33 @@
+.sct-parallax {
+  background: none no-repeat fixed;
+  padding-bottom: 8em;
+  padding-top: 8em;
+
+  &.main-header {
+    padding-bottom: 10em;
+    padding-top: 13em;
+  }
+}
+
+.sct-slideshow {
+  overflow: hidden;
+  position: relative;
+
+  .images-container, .slider-img, .slider-cover {
+    background: none no-repeat center top fixed;
+    background-size: contain;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .slider-cover {
+    background: url(../images/dotted-overlay.png) repeat 0 0;
+  }
+}
+
+.main-header {
+  margin-top: -$header-height;
+}
