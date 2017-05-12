@@ -1,0 +1,36 @@
+.main-header {
+
+  &.sct-parallax {
+    padding-bottom: 10em;
+    padding-top: 18em;
+    min-height: 580px;
+  }
+
+  .list-menu {
+    margin: 0;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .menu-item-wp {
+    display: inline-block;
+  }
+
+  .menu-item {
+    border: 2px solid white;
+    color: white;
+    display: block;
+    font-size: 1.15em;
+    margin: 1px;
+    padding: 3px 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all .3s;
+
+    &:hover {
+      background-color: rgba(black, .5);
+      border-color: $smoke;
+    }
+  }
+}
