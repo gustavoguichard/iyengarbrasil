@@ -5,6 +5,7 @@ export const initState = {
   windowHeight: 0,
   menuOpen: false,
   windowY: 0,
+  ticks: 0,
 }
 
 export default (state = initState, action) => {
@@ -25,6 +26,11 @@ export default (state = initState, action) => {
       return {
         ...state,
         windowY: action.position,
+      }
+    case 'TICK':
+      return {
+        ...state,
+        ticks: state.ticks + 1,
       }
     default:
       return state
