@@ -1,12 +1,9 @@
 .sct-parallax {
-  background: none no-repeat fixed;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   padding-bottom: 8em;
   padding-top: 8em;
-
-  &.main-header {
-    padding-bottom: 10em;
-    padding-top: 13em;
-  }
 }
 
 .sct-slideshow {
@@ -14,13 +11,32 @@
   position: relative;
 
   .images-container, .slider-img, .slider-cover {
-    background: none no-repeat center top fixed;
-    background-size: contain;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     top: 0;
+  }
+
+  .images-container {
+    z-index: -1;
+  }
+
+  .slider-img {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+
+    &.active {
+      display: block;
+      z-index: 1;
+    }
+
+    &.fading {
+      display: block;
+      z-index: 2;
+    }
   }
 
   .slider-cover {
