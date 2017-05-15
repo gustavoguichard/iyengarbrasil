@@ -31,6 +31,10 @@
     }
   }
 
+  &.mobile, &.mobile .slider-img {
+    background-attachment: scroll;
+  }
+
   .parallax-cover {
     position: absolute;
     bottom: 0;
