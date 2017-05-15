@@ -14,8 +14,9 @@ export default class MainMenu {
     const { windowY, windowHeight, menuVisible } = this.store.getState()
     const isVisible = isOnScreen(this.el, windowHeight, windowY)
     if(isVisible !== this.visible) {
+      const name = isVisible ? 'HIDE_MENU' : 'SHOW_MENU'
       this.visible = isVisible
-      this.store.dispatch({ name: isVisible ? 'HIDE_MENU' : 'SHOW_MENU' })
+      this.store.dispatch({ name })
     }
   }
 }
