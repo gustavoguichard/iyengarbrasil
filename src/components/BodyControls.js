@@ -40,6 +40,7 @@ export default class BodyControls {
   tick() {
     this.store.dispatch({
       name: 'TICK',
+      silent: true,
     })
   }
 
