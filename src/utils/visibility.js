@@ -18,5 +18,12 @@ export default (fn) => {
     // Handle page visibility change
     document.addEventListener(visibilityChange, fn, false);
   }
-  return hidden
+  return {
+    hidden,
+    unlisten: () => {
+      if(typeof document.removeEventListener !== "undefined") {
+        document.removeEventListener(visibilityChange, fn, false)
+      }
+    },
+  }
 }

@@ -7,7 +7,7 @@ export default class BodyControls {
     this.el = el
     this.store = store
     this.ticker = null
-    this.hidden = null
+    this.visibility = null
 
     this.listeners()
   }
@@ -15,7 +15,7 @@ export default class BodyControls {
   listeners() {
     $(window).on('resize', debounce(this.windowResized, 150))
     $(window).on('scroll', debounce(this.windowScrolled, 150))
-    this.hidden = visibility(this.handleVisibilityChange.bind(this))
+    this.visibility = visibility(this.handleVisibilityChange.bind(this))
 
     setTimeout(this.handleVisibilityChange.bind(this), 100)
     setTimeout(this.windowResized, 100)
@@ -32,7 +32,7 @@ export default class BodyControls {
   }
 
   handleVisibilityChange() {
-    document[this.hidden]
+    document[this.visibility.hidden]
       ? this.deactivateTick()
       : this.activateTick()
   }

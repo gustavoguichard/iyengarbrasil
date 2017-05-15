@@ -1,5 +1,3 @@
-import { noop } from 'lodash'
-
 const isVisible = (y, screenLimit) => y >= 0 && y < screenLimit
 
 export default (obj, windowHeight, windowY = 0, offset = 0) => {
