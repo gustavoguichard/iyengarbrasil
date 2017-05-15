@@ -7,40 +7,41 @@ export default class BodyControls {
     this.el = el
     this.store = store
     this.ticker = null
-    this.visibility = null
 
     this.listeners()
+
+    store.subscribe(this.update.bind(this), 'activeTab')
   }
 
   listeners() {
-    $(window).on('resize', debounce(this.windowResized, 150))
-    $(window).on('scroll', debounce(this.windowScrolled, 150))
-    this.visibility = visibility(this.handleVisibilityChange.bind(this))
+    $(window).on('resize', debounce(this.windowResized.bind(this), 150))
+    $(window).on('scroll', debounce(this.windowScrolled.bind(this), 150))
+    $(document).on(visibility.change, this.visibilityChanged.bind(this))
 
-    setTimeout(this.handleVisibilityChange.bind(this), 100)
-    setTimeout(this.windowResized, 100)
-    setTimeout(this.windowScrolled, 100)
+    setTimeout(() => {
+      this.visibilityChanged()
+      this.windowResized()
+      this.windowScrolled()
+    }, 100)
   }
 
-  activateTick() {
-    this.ticker = setInterval(this.tick, 1000)
-  }
-
-  deactivateTick() {
-    clearInterval(this.ticker)
-    this.ticker = null
-  }
-
-  handleVisibilityChange() {
-    document[this.visibility.hidden]
-      ? this.deactivateTick()
-      : this.activateTick()
+  update({ activeTab }) {
+    activeTab
+      ? this.ticker = setInterval(this.tick.bind(this), 1000)
+      : this.ticker = clearInterval(this.ticker)
   }
 
   tick() {
     this.store.dispatch({
       name: 'TICK',
       silent: true,
+    })
+  }
+
+  visibilityChanged() {
+    this.store.dispatch({
+      name: 'CHANGED_TAB',
+      active: !document[visibility.hidden],
     })
   }
 

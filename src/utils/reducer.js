@@ -1,12 +1,13 @@
 import { isEmpty } from 'lodash'
 
 export const initState = {
+  activeTab: true,
   currentSection: 'home',
   menuOpen: false,
   menuVisible: true,
   ticks: 0,
-  windowHeight: 0,
-  windowWidth: 0,
+  windowH: 0,
+  windowW: 0,
   windowY: 0,
 }
 
@@ -16,8 +17,13 @@ export default (state = initState, action) => {
     case 'WINDOW_RESIZED':
       return {
         ...state,
-        windowWidth: action.width || state.windowWidth,
-        windowHeight: action.height || state.windowHeight,
+        windowW: action.width || state.windowW,
+        windowH: action.height || state.windowH,
+      }
+    case 'CHANGED_TAB':
+      return {
+        ...state,
+        activeTab: action.active,
       }
     case 'CHANGE_SECTION':
       return {

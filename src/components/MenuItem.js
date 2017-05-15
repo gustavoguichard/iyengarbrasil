@@ -13,12 +13,9 @@ export default class MainItem {
     }
   }
 
-  update() {
-    const { currentSection } = this.store.getState()
-    if(this.hash === currentSection) {
-      $(this.el).addClass('active')
-    } else {
-      $(this.el).removeClass('active')
-    }
+  update({ currentSection }) {
+    this.hash === currentSection
+      ? $(this.el).addClass('active')
+      : $(this.el).removeClass('active')
   }
 }

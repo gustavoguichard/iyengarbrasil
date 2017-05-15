@@ -1,24 +1,26 @@
 import $ from 'jquery'
-import { compact, join, map, difference, kebabCase } from 'lodash'
+import { mapValues } from 'lodash'
+import { classNames, not } from '../utils/helpers'
 
 export default class MainMenu {
   constructor(el, store) {
     this.el = el
     this.store = store
 
-    store.subscribe(this.update.bind(this), 'menuOpen', 'menuVisible')
     this.listeners()
+
+    store.subscribe(this.update.bind(this), 'menuOpen', 'menuVisible')
   }
 
-  update() {
-    const { menuOpen, menuVisible } = this.store.getState()
-    const possibleClasses = ['menu-open', 'menu-visible']
-    const getValidKeysKebab = (v, k) => v ? kebabCase(k) : false
-    const newClasses = compact(map({ menuOpen, menuVisible }, getValidKeysKebab))
-    const removeClasses = difference(possibleClasses, newClasses)
+  update({ menuOpen, menuVisible }) {
+    const possibleClasses = {
+      'menu-open': menuOpen,
+      'menu-visible': menuVisible,
+    }
+    const removeClasses = mapValues(possibleClasses, not)
     $(this.el)
-      .addClass(join(newClasses, ' '))
-      .removeClass(join(removeClasses, ' '))
+      .addClass(classNames(possibleClasses))
+      .removeClass(classNames(removeClasses))
   }
 
   listeners() {

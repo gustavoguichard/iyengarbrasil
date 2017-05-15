@@ -16,10 +16,10 @@ export const createStore = reducer => {
       consoleGroup(prevState, 'Prev State', 'green')
       consoleGroup(action, 'Action', '#f66')
       consoleGroup(state, 'Next State', '#f66')
-      consoleGroup(changed, 'Changed Values', 'gray')
+      // consoleGroup(changed, 'Changed Values', 'gray')
     }
     listeners.forEach(lst => {
-      if(lst.keys.length === 0 || !!intersection(lst.keys, changed).length) lst.callback()
+      if(lst.keys.length === 0 || !!intersection(lst.keys, changed).length) lst.callback(state)
     })
   }
 

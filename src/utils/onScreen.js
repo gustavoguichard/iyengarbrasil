@@ -1,10 +1,11 @@
-const isVisible = (y, screenLimit) => y >= 0 && y < screenLimit
+import { inRange, isUndefined } from 'lodash'
 
-export default (obj, windowHeight, windowY = 0, offset = 0) => {
-  if (typeof obj.getBoundingClientRect !== "undefined") {
+export default (obj, windowH, windowY = 0) => {
+  if (isUndefined(obj.getBoundingClientRect)) {
+    return true
+  } else {
     const { bottom, top } = obj.getBoundingClientRect()
-    const screenLimit = windowY + windowHeight
-    return isVisible(top, screenLimit) || isVisible(bottom, screenLimit)
+    const screenLimit = windowY + windowH
+    return inRange(top, screenLimit) || inRange(bottom, screenLimit)
   }
-  return true
 }

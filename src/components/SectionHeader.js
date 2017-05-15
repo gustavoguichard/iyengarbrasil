@@ -9,11 +9,10 @@ export default class SectionHeader {
     store.subscribe(this.update.bind(this), 'windowY')
   }
 
-  update() {
-    const { windowY, currentSection } = this.store.getState()
-    const fromTop = this.el.getBoundingClientRect().top
+  update({ windowY, currentSection }) {
+    const { top } = this.el.getBoundingClientRect()
 
-    if(fromTop < 150 && currentSection !== this.el.id) {
+    if(top < 150 && currentSection !== this.el.id) {
       this.store.dispatch({
         name: 'CHANGE_SECTION',
         section: this.el.id,

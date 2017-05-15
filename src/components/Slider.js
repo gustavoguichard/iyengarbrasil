@@ -22,19 +22,18 @@ export default class Slider {
     images.first().addClass('active')
   }
 
-  update() {
-    const { ticks } = this.store.getState()
-    const newCurrent = floor(ticks / this.time) % this.length
+  update({ ticks }) {
+    const index = floor(ticks / this.time) % this.length
 
-    if(this.current !== newCurrent) {
-      this.current = newCurrent
-      this.stepSlider(newCurrent)
+    if(this.current !== index) {
+      this.current = index
+      this.stepSlider(index)
     }
   }
 
-  stepSlider(newCurrent) {
+  stepSlider(index) {
     const currEl = $('.active', this.container)
-    const nextEl = $('.slider-img', this.container).eq(newCurrent)
+    const nextEl = $('.slider-img', this.container).eq(index)
     currEl
       .removeClass('active')
       .addClass('fading')
@@ -45,5 +44,4 @@ export default class Slider {
       .show()
       .addClass('active')
   }
-
 }
