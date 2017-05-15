@@ -1,12 +1,13 @@
 import { isEmpty } from 'lodash'
 
 export const initState = {
-  windowWidth: 0,
-  windowHeight: 0,
+  currentSection: 'home',
   menuOpen: false,
   menuVisible: true,
-  windowY: 0,
   ticks: 0,
+  windowHeight: 0,
+  windowWidth: 0,
+  windowY: 0,
 }
 
 export default (state = initState, action) => {
@@ -17,6 +18,11 @@ export default (state = initState, action) => {
         ...state,
         windowWidth: action.width || state.windowWidth,
         windowHeight: action.height || state.windowHeight,
+      }
+    case 'CHANGE_SECTION':
+      return {
+        ...state,
+        currentSection: action.section,
       }
     case 'TOGGLE_MENU':
       return {

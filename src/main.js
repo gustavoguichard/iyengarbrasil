@@ -5,7 +5,9 @@ import reducer from './utils/reducer'
 import BodyControls from './components/BodyControls'
 import MainMenu from './components/MainMenu'
 import MainHeader from './components/MainHeader'
+import MenuItem from './components/MenuItem'
 import Parallax from './components/Parallax'
+import SectionHeader from './components/SectionHeader'
 import Slider from './components/Slider'
 import Photo from './components/Photo'
 
@@ -30,7 +32,9 @@ const COMPONENTS = {
   '.sct-slideshow': Slider,
   '.sct-parallax': Parallax,
   '.main-header': MainHeader,
+  '.section-header[id]': SectionHeader,
   'img.photo': Photo,
+  '.main-menu .menu-item[href^="#"]': MenuItem,
   // '.menu-link, .menu-shadow, [data-open-menu]': MenuLink,
 }
 
