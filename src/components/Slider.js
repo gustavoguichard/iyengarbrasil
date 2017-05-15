@@ -20,7 +20,6 @@ export default class Slider {
     this.length = images.length
 
     images.first().addClass('active')
-    $(this.container).after('<div class="slider-cover" />')
   }
 
   update() {

@@ -5,7 +5,9 @@ import reducer from './utils/reducer'
 import BodyControls from './components/BodyControls'
 import MainMenu from './components/MainMenu'
 import MainHeader from './components/MainHeader'
+import Parallax from './components/Parallax'
 import Slider from './components/Slider'
+import Photo from './components/Photo'
 
 class Site {
   constructor(window) {
@@ -26,7 +28,9 @@ const COMPONENTS = {
   'body': BodyControls,
   '.main-menu': MainMenu,
   '.sct-slideshow': Slider,
+  '.sct-parallax': Parallax,
   '.main-header': MainHeader,
+  'img.photo': Photo,
   // '.menu-link, .menu-shadow, [data-open-menu]': MenuLink,
 }
 

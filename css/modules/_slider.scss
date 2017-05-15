@@ -1,21 +1,7 @@
-.sct-parallax {
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-bottom: 8em;
-  padding-top: 8em;
-
-  @media (min-width: $tablet + 1) {
-    &, .slider-img {
-      background-attachment: fixed;
-    }
-  }
-}
-
 .sct-slideshow {
   overflow: hidden;
-  position: relative;
 
-  .images-container, .slider-img, .slider-cover {
+  .images-container, .slider-img {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -43,12 +29,4 @@
       z-index: 2;
     }
   }
-
-  .slider-cover {
-    background: url(../images/dotted-overlay.png) repeat 0 0;
-  }
-}
-
-.main-header {
-  margin-top: -$header-height;
 }
