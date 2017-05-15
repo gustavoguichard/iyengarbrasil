@@ -1,17 +1,32 @@
 .main-header {
+  margin-top: -$header-height;
 
   @media (min-width: $tablet + 1) {
     &.sct-parallax {
       padding-bottom: 10em;
-      padding-top: 18em;
+      padding-top: 15em;
       min-height: 580px;
+    }
+  }
+
+  .header-menu {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .logo {
+    width: 130px;
+    margin-bottom: 2em;
+
+    @media (min-width: $tablet + 1) {
+      width: 200px;
     }
   }
 
   .list-menu {
     margin: 0;
     position: relative;
-    text-align: center;
     z-index: 2;
   }
 
@@ -21,11 +36,11 @@
 
   .menu-item {
     border: 2px solid white;
-    color: white;
     display: block;
-    font-size: 1.15em;
+    color: white;
+    font-weight: 700;
     margin: 1px;
-    padding: 3px 8px;
+    padding: 8px 14px;
     text-decoration: none;
     text-transform: uppercase;
     transition: all .3s;

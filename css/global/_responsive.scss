@@ -3,7 +3,7 @@
 @media (max-width: $tablet - 1px) {
   .mobile-visible { display: block; }
   .mobile-hidden, .tablet-visible, .desktop-visible { display: none !important; }
-  .block-xs {
+  .block-xs, .button {
     display: block !important;
     width: 100%;
   }

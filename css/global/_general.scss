@@ -34,7 +34,16 @@ img {
 
 .main-content {
   position: relative;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
+}
+
+.text-highlight {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.white {
+  background-color: white;
 }
 
 .hidden {
@@ -45,6 +54,13 @@ img {
   display: block;
   text-indent: -999em;
   overflow: hidden;
+}
+
+.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 ::selection {

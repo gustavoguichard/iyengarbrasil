@@ -1,11 +1,28 @@
 .section-header {
   background-color: white;
   border-bottom: 10px solid $ice;
+  border-top: 10px solid $ice;
   box-shadow: 0 2px 2px rgba(black, .05);
   margin: 0 auto 1em;
   padding: 45px 0 20px;
   text-align: center;
   width: 100%;
+
+  &.no-margin {
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+}
+
+.photo {
+  border: 5px solid white;
+  box-shadow: 1px 1px 3px rgba(black, .4);
+  margin-bottom: 2em;
+}
+
+.content-section {
+  padding-bottom: 3em;
+  padding-top: 5em;
 }
 
 .teacher {
@@ -26,7 +43,6 @@
   }
 
   .profile-picture {
-    border: 4px solid $orange;
     border-radius: 2px;
     margin-bottom: 1em;
   }

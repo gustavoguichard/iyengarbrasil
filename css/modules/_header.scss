@@ -9,7 +9,7 @@ $menu-font: 15px;
   transition: box-shadow .6s;
   transition: top .3s;
 
-  &.menu-visible {
+  &.menu-visible, &.menu-open {
     top: 0;
   }
 
@@ -39,6 +39,10 @@ $menu-font: 15px;
 
     &:hover {
       background-color: rgba($gray-darker, .3);
+    }
+
+    &.active {
+      background-color: $orange;
     }
   }
 
