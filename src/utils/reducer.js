@@ -35,6 +35,11 @@ export default (state = initState, action) => {
         ...state,
         menuOpen: !state.menuOpen,
       }
+    case 'CLOSE_MENU':
+      return {
+        ...state,
+        menuOpen: false,
+      }
     case 'SHOW_MENU':
       return {
         ...state,

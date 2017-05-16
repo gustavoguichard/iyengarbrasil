@@ -43,6 +43,11 @@ $menu-font: 15px;
 
     &.active {
       background-color: $orange;
+      color: white !important;
+
+      &:hover {
+        background-color: $yellow;
+      }
     }
   }
 
