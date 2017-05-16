@@ -1,0 +1,19 @@
+.atv-wrapper {
+  margin: 0 1em 2em;
+  text-align: center;
+
+  .atv-title {
+    color: $orange;
+    font-weight: 600;
+    font-size: 1.6em;
+  }
+
+  .atv-cover {
+    margin-bottom: 0;
+  }
+
+  .atv-info {
+    color: $gray;
+    font-weight: 600;
+  }
+}

@@ -49,5 +49,9 @@
       background-color: rgba(black, .5);
       border-color: $smoke;
     }
+
+    &.active {
+      border-color: $orange;
+    }
   }
 }

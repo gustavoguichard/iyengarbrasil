@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background-color: $ice;
+  background-color: white;
   color: $gray-darker;
   height: 100%;
   overflow-x: hidden;
@@ -42,8 +42,8 @@ img {
   font-weight: 600;
 }
 
-.white {
-  background-color: white;
+.ice {
+  background-color: $ice;
 }
 
 .hidden {
