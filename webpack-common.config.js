@@ -11,6 +11,9 @@ module.exports = {
     path: path.resolve('js'),
     filename: '[name].bundle.js',
   },
+  externals: {
+    'jquery': 'jQuery',
+  },
   devtool: 'source-map',
   module: {
     loaders: [

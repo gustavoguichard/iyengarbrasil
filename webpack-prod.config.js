@@ -7,6 +7,7 @@ module.exports = {
   context: common.context,
   entry: common.entry,
   output: common.output,
+  externals: common.externals,
   module: {
     loaders: common.module.loaders.concat({
       test: /\.scss$/,

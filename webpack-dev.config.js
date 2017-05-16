@@ -8,6 +8,7 @@ module.exports = {
   output: Object.assign({}, common.output, {
     path: path.resolve('src'),
   }),
+  externals: common.externals,
   devtool: 'source-map',
   module: {
     loaders: common.module.loaders.concat({
