@@ -8,8 +8,9 @@ export default class MainMenu {
     store.subscribe(this.update.bind(this), 'windowY', 'windowH')
   }
 
-  update({ windowY, windowH }) {
-    const name = isAbove(this.el, 65) ? 'HIDE_MENU' : 'SHOW_MENU'
-    this.store.dispatch({ name })
+  update({ windowY, windowH, menuVisible }) {
+    const shouldHide = isAbove(this.el, 65)
+    const name = shouldHide ? 'HIDE_MENU' : 'SHOW_MENU'
+    shouldHide === menuVisible && this.store.dispatch({ name })
   }
 }
