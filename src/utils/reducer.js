@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash'
 
 export const initState = {
-  activeTab: true,
+  activeTab: false,
   currentSection: 'home',
   menuOpen: false,
   menuVisible: true,
