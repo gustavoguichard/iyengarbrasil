@@ -1,11 +1,18 @@
-import { inRange, isUndefined } from 'lodash'
+import { max } from 'lodash'
 
-export default (obj, windowH, windowY = 0, offset = 0) => {
-  if (isUndefined(obj.getBoundingClientRect)) {
-    return true
-  } else {
-    const { bottom, top } = obj.getBoundingClientRect()
-    const screenLimit = windowY + windowH
-    return inRange(top, offset, screenLimit) || inRange(bottom, offset, screenLimit)
-  }
+export const isOnScreen = (elm, offset = 0, mode = 'visible') => {
+  const { bottom, top } = elm.getBoundingClientRect()
+  const wHeight = max([document.documentElement.clientHeight, window.innerHeight])
+  const visibleAbove = bottom - offset >= 0
+  const visibleBelow = top - wHeight + offset < 0
+
+  return mode === 'above'
+    ? visibleAbove
+    : (mode === 'below'
+        ? visibleBelow
+        : visibleAbove && visibleBelow
+      )
 }
+
+export const isBelow = (elm, offset = 0) => isOnScreen(elm, offset, 'below')
+export const isAbove = (elm, offset = 0) => isOnScreen(elm, offset, 'above')

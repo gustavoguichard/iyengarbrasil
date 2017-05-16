@@ -1,5 +1,4 @@
-import $ from 'jquery'
-import { inRange } from 'lodash'
+import { isBelow } from '../utils/onScreen'
 
 export default class SectionHeader {
   constructor(el, store) {
@@ -9,10 +8,9 @@ export default class SectionHeader {
     store.subscribe(this.update.bind(this), 'windowY')
   }
 
-  update({ windowY, currentSection }) {
-    const { top } = this.el.getBoundingClientRect()
-
-    if(top < 150 && currentSection !== this.el.id) {
+  update({ currentSection, windowH }) {
+    const belowElm = isBelow(this.el, windowH - 150)
+    if(belowElm && currentSection !== this.el.id) {
       this.store.dispatch({
         name: 'CHANGE_SECTION',
         section: this.el.id,
