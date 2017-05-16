@@ -3,6 +3,7 @@ import { map } from 'lodash'
 import { createStore } from './utils/redux'
 import reducer from './utils/reducer'
 
+import Accordeon from './components/Accordeon'
 import BodyControls from './components/BodyControls'
 import MainHeader from './components/MainHeader'
 import MainMenu from './components/MainMenu'
@@ -28,6 +29,7 @@ class Site {
 }
 
 const COMPONENTS = {
+  '.accordeon': Accordeon,
   'body': BodyControls,
   '.main-header': MainHeader,
   '.main-menu': MainMenu,
