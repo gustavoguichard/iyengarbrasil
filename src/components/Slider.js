@@ -8,10 +8,10 @@ export default class Slider {
 
     store.subscribe(this.update.bind(this), 'ticks')
 
-    this.mountSlider()
+    this.mount()
   }
 
-  mountSlider() {
+  mount() {
     this.current = 0
     this.container = $(this.el).find('.images-container')
     this.time = this.el.dataset['time'] || 5

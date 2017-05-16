@@ -12,10 +12,10 @@
 }
 
 .album-container {
-  text-align: center;
 
   .photo {
     display: inline-block;
+    max-height: 200px;
     max-width: 240px;
     margin: 0 12px 10px 0;
   }

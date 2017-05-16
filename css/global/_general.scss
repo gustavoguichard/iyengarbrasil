@@ -35,6 +35,10 @@ img {
 .main-content {
   position: relative;
   padding-bottom: 2em;
+
+  p {
+    max-width: 740px;
+  }
 }
 
 .text-highlight {
