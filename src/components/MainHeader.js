@@ -11,7 +11,7 @@ export default class MainMenu {
   }
 
   update({ windowY, windowH }) {
-    const isVisible = isOnScreen(this.el, windowH, windowY)
+    const isVisible = isOnScreen(this.el, windowH, windowY, 65)
 
     if(isVisible !== this.visible) {
       const name = isVisible ? 'HIDE_MENU' : 'SHOW_MENU'
