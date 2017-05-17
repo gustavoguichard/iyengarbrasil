@@ -12,8 +12,10 @@ module.exports = {
     loaders: common.module.loaders.concat({
       test: /\.scss$/,
       include: path.resolve('css'),
-      loader: ExtractTextPlugin.extract('style-loader',
-                'css-loader!autoprefixer-loader!sass-loader'),
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'autoprefixer-loader', 'sass-loader'],
+      }),
     }),
   },
   resolve: common.resolve,
@@ -25,6 +27,6 @@ module.exports = {
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 10000 }),
-    new ExtractTextPlugin('./css/[name].css'),
+    new ExtractTextPlugin('../css/[name].css'),
   ],
 };
