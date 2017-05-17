@@ -11,7 +11,7 @@ module.exports = {
   module: {
     loaders: common.module.loaders.concat({
       test: /\.scss$/,
-      include: path.resolve('css'),
+      include: path.resolve('styles'),
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: ['css-loader', 'autoprefixer-loader', 'sass-loader'],

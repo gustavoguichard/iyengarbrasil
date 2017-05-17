@@ -13,7 +13,7 @@ module.exports = {
   module: {
     loaders: common.module.loaders.concat({
       test: /\.scss$/,
-      include: path.resolve('css'),
+      include: path.resolve('styles'),
       loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader',
     }),
   },

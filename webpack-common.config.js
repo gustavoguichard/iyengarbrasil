@@ -4,7 +4,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: [
     'babel-polyfill',
-    path.resolve('css', 'styles.scss'),
+    path.resolve('styles', 'styles.scss'),
     path.resolve('src', 'main.js'),
   ],
   output: {
