@@ -4,6 +4,7 @@ export const initState = {
   accordeons: [],
   activeTab: false,
   currentSection: 'home',
+  ctaOpen: false,
   menuOpen: false,
   menuVisible: true,
   openForms: false,
@@ -26,6 +27,11 @@ export default (state = initState, action) => {
       return {
         ...state,
         activeTab: action.active,
+      }
+    case 'CTA_CLICKED':
+      return {
+        ...state,
+        ctaOpen: true,
       }
     case 'CHANGE_SECTION':
       return {

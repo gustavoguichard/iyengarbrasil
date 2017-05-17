@@ -5,6 +5,8 @@ import reducer from './utils/reducer'
 
 import Accordeon from './components/Accordeon'
 import BodyControls from './components/BodyControls'
+import ButtonCTA from './components/ButtonCTA'
+import CTASection from './components/CTASection'
 import MainHeader from './components/MainHeader'
 import MainMenu from './components/MainMenu'
 import MenuItem from './components/MenuItem'
@@ -31,6 +33,8 @@ class Site {
 const COMPONENTS = {
   '.accordeon': Accordeon,
   'body': BodyControls,
+  '.bt-cta': ButtonCTA,
+  '.cta-section': CTASection,
   '.main-header': MainHeader,
   '.main-menu': MainMenu,
   '.main-menu .menu-item[href^="#"], .header-menu .menu-item[href^="#"]': MenuItem,
