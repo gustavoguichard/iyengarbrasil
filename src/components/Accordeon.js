@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { map, uniqueId, find } from 'lodash'
 import * as isMobile from '../utils/isMobile'
+import { scrollToElm } from '../utils/scroll'
 import { classNames } from '../utils/helpers'
 
 export default class Accordeon {
@@ -15,11 +16,11 @@ export default class Accordeon {
 
   mount() {
     this.id = uniqueId()
+    this.mobile = isMobile.any()
 
-    const mobile = isMobile.any()
     const classes = classNames({
-      desktop: !mobile,
-      mobile,
+      desktop: !this.mobile,
+      mobile: this.mobile,
     })
     $(this.el).addClass(classes)
 
@@ -27,7 +28,7 @@ export default class Accordeon {
       $(elm).data('index', index)
     })
 
-    !mobile && $(this.el).append('<div class="acd-dynamic-content">')
+    !this.mobile && $(this.el).append('<div class="acd-dynamic-content">')
 
     this.store.dispatch({
       name: 'SUBSCRIBE_ACCORDEON',
@@ -43,6 +44,7 @@ export default class Accordeon {
         id: this.id,
         index,
       })
+      this.mobile && scrollToElm(event.currentTarget, -100)
     })
   }
 
@@ -51,7 +53,9 @@ export default class Accordeon {
     $('.acd-section', this.el).removeClass('active')
     const current = $('.acd-section', this.el).eq(index)
     current.addClass('active')
-    const content = current.find('.acd-content').html()
-    $('.acd-dynamic-content', this.el).html(content)
+    if (!this.mobile) {
+      const content = current.find('.acd-content').html()
+      $('.acd-dynamic-content', this.el).html(content)
+    }
   }
 }

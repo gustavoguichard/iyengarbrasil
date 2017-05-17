@@ -1,23 +1,23 @@
 import $ from 'jquery'
 import { max } from 'lodash'
 
-export const scrollToId = (id, offset) => {
+export const scrollToId = (id, offset, animate = true) => {
   const elm = document.getElementById(id)
-  scrollToElm(elm, offset)
+  scrollToElm(elm, offset, animate)
 }
 
-export const scrollToElm = (elm, offset = 0) => {
+export const scrollToElm = (elm, offset = 0, animate = true) => {
   if (elm) {
     const { top } = elm.getBoundingClientRect()
     const scrollY = window.scrollY + top + offset
-    scrollTo(scrollY)
+    scrollTo(scrollY, animate)
   } else {
-    scrollTo(offset)
+    scrollTo(offset, animate)
   }
 }
 
-export const scrollTo = (top = 0) => {
-  $('html, body').animate({ scrollTop: `${top}px` }, 'fast')
+export const scrollTo = (top = 0, animate = true) => {
+  $('html, body').animate({ scrollTop: `${top}px` }, animate ? 'fast' : 0)
 }
 
 export const isOnScreen = (elm, offset = 0, mode = 'visible') => {
