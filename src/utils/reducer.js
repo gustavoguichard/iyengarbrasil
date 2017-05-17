@@ -6,6 +6,7 @@ export const initState = {
   currentSection: 'home',
   menuOpen: false,
   menuVisible: true,
+  openForms: false,
   ticks: 0,
   windowH: 0,
   windowW: 0,
@@ -63,6 +64,11 @@ export default (state = initState, action) => {
           ? { ...acc, index: action.index }
           : acc
         ),
+      }
+    case 'SHOW_FORMS':
+      return {
+        ...state,
+        openForms: true,
       }
     case 'WINDOW_SCROLLED':
       return {
