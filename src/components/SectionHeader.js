@@ -1,4 +1,4 @@
-import { isBelow } from '../utils/onScreen'
+import { isBelow } from '../utils/scroll'
 
 export default class SectionHeader {
   constructor(el, store) {

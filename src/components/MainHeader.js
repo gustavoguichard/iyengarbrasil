@@ -1,4 +1,4 @@
-import { isAbove } from '../utils/onScreen'
+import { isAbove } from '../utils/scroll'
 
 export default class MainMenu {
   constructor(el, store) {
