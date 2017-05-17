@@ -61,7 +61,7 @@ $menu-font: 15px;
     overflow-y: scroll;
     position: fixed;
     right: 0;
-    transition: max-height .6s;
+    transition: max-height 0s;
     top: $header-height;
 
     & > li {
@@ -84,6 +84,7 @@ $menu-font: 15px;
 
     .list-menu {
       max-height: 1000px;
+      transition: max-height .6s;
     }
   }
 
