@@ -14,9 +14,11 @@
   thead th, tbody td {
     border: 0 solid;
     color: white;
+    min-width: 140px;
     padding: 6px 15px;
     text-align: center;
     vertical-align: middle;
+    width: 10%;
 
     &:empty {
       background-color: transparent;
