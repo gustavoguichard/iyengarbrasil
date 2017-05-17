@@ -33,11 +33,11 @@ const COMPONENTS = {
   'body': BodyControls,
   '.main-header': MainHeader,
   '.main-menu': MainMenu,
-  '.main-menu .menu-item[href^="#"]': MenuItem,
+  '.main-menu .menu-item[href^="#"], .header-menu .menu-item[href^="#"]': MenuItem,
   '.sct-parallax': Parallax,
   'img.photo': Photo,
   '.sct-slideshow': Slider,
-  '.section-header[id]': SectionHeader,
+  '.section-header[id], #home': SectionHeader,
 }
 
 $(jQuery => new Site(window))

@@ -1,12 +1,14 @@
 import $ from 'jquery'
-import { debounce, split } from 'lodash'
+import { debounce, split, startsWith } from 'lodash'
+import { scrollToId } from '../utils/scroll'
 
 export default class MainItem {
   constructor(el, store) {
     this.el = el
     this.store = store
 
-    this.hash = split(el.getAttribute('href'), '#')[1]
+    this.href = el.getAttribute('href')
+    this.hash = split(this.href, '#')[1]
     if(this.hash) {
       const slowUpdate = debounce(this.update.bind(this), 150)
       store.subscribe(slowUpdate, 'currentSection')
@@ -24,6 +26,9 @@ export default class MainItem {
   listeners() {
     $(this.el).on('click', ev => {
       this.store.dispatch({ name: 'CLOSE_MENU' })
+      if(startsWith(this.href, '#')) {
+        scrollToId(this.hash)
+      }
     })
   }
 }
