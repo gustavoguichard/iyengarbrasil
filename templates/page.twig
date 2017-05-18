@@ -1,14 +1,56 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<div class="content-wrapper">
-		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
-			<section class="article-content">
-				<h1 class="article-h1">{{post.title}}</h1>
-				<div class="article-body">
-					{{post.content}}
-				</div>
-			</section>
-		</article>
-	</div><!-- /content-wrapper -->
+	{% if post.get_field('top_style') == 'Texto' %}
+    <div id="{{post.slug}}" class="section-header">
+      <div class="container">
+        <h1 class="header-title">{{post.title}}</h1>
+      </div>
+    </div>
+  {% elseif post.get_field('top_style') == 'Imagem' %}
+    <section class="sct-parallax  main-header" style="background-image: url({{TimberImage(post.get_field('top_image')).src}})">
+      <div class="container">
+        <h1>{{post.title}}</h1>
+        {% if post.get_field('top_subtitle') %}
+          <h3>{{post.get_field('top_subtitle')}}</h3>
+        {% endif %}
+      </div>
+    </section>
+  {% elseif post.get_field('top_style') == 'Slider' %}
+    <section class="sct-slideshow sct-parallax main-header" data-time="5">
+      <div class="images-container">
+        {# {% for image in post.get_field('top_slider_images') %} #}
+          <div class="slider-img" style="background-image: url({{TimberImage(post.get_field('top_slider_images')).src}})"></div>{{image}}
+        {# {% endfor %} #}
+      </div>
+      <div class="container">
+        <h1>{{post.title}}</h1>
+        {% if post.get_field('top_subtitle') %}
+          <h3>{{post.get_field('top_subtitle')}}</h3>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+    {{post.content}}
+    {% if post.get_field('cta_text') %}
+      <p><a href="#" class="button button-primary bt-cta">{{post.get_field('cta_text')}}</a></p>
+    {% endif %}
+    {% if post.get_field('cta_form') %}
+      <aside class="cta-section">
+        <hr>
+        <h4>{{post.get_field('cta_text')}}</h4>
+        {{post.get_field('cta_form')|shortcodes}}
+      </aside>
+    {% endif %}
+  </article>
+  {% if post.get_field('footer_image') %}
+    <section class="sct-parallax" style="background-image: url({{TimberImage(post.get_field('footer_image')).src}})">
+      {% if post.get_field('footer_content') %}
+        <div class="container">
+          <h3>{{post.get_field('footer_content')}}</h3>
+        </div>
+      {% endif %}
+    </section>
+  {% endif %}
 {% endblock %}

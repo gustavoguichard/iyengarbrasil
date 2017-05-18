@@ -18,7 +18,7 @@ export default class CTASection {
   update({ ctaOpen }) {
     if (ctaOpen) {
       $(this.el).slideDown('fast', () => {
-        scrollToElm(this.el)
+        scrollToElm(this.el, -60)
       })
     }
   }
