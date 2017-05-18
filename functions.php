@@ -20,13 +20,23 @@ class StarterSite extends TimberSite {
 		add_theme_support( 'post-formats' );
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
-    remove_filter( 'the_content', 'wpautop' );
-    add_filter( 'the_content', 'wpautop' , 15);
     add_filter( 'use_default_gallery_style', '__return_false' );
+    add_filter( 'tablepress_use_default_css', '__return_false' );
     add_filter( 'timber_context', array( $this, 'add_to_context' ) );
     add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
+    add_filter('the_content', array( $this, 'wpex_fix_shortcodes') );
+    // all actions related to emojis
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
+    add_action( 'admin_menu', array( $this, 'remove_menus' ) );
     add_action( 'wp_enqueue_scripts', array( $this, 'add_theme_styles') );
     add_action( 'wp_enqueue_scripts', array( $this, 'add_theme_scripts') );
     remove_shortcode('gallery');
@@ -35,8 +45,23 @@ class StarterSite extends TimberSite {
     add_shortcode('aba', array( $this, 'accordeon_section_cb' ) );
     add_shortcode('video', array( $this, 'video_cb' ) );
     add_shortcode('citacao', array( $this, 'blockquote_cb' ) );
-		parent::__construct();
-	}
+
+    parent::__construct();
+  }
+
+  function remove_menus() {
+    remove_menu_page( 'edit-comments.php' );
+  }
+
+  function wpex_fix_shortcodes($content){
+    $array = array (
+      '<p>[' => '[',
+      ']</p>' => ']',
+      ']<br />' => ']'
+    );
+    $content = strtr($content, $array);
+    return $content;
+  }
 
   function accordeon_cb($atts, $content = null) {
     return '<div class="accordeon">' . do_shortcode($content) .'</div>';
@@ -98,11 +123,64 @@ class StarterSite extends TimberSite {
   }
 
   function register_post_types() {
-    //this is where you can register custom post types
+    $labels = array(
+      'name' => 'Álbums',
+      'singular_name' => 'Álbum',
+      'add_new' => 'Adicionar novo',
+      'add_new_item' => 'Adicionar Álbum',
+      'edit_item' => 'Editar Álbum',
+      'new_item' => 'Novo Álbum',
+      'view_item' => 'Ver Álbum',
+      'search_items' => 'Buscar Álbums',
+      'not_found' => 'Nenhum Álbum encontrado',
+      'not_found_in_trash' => 'Nenhum Álbum encontrado na lixeira',
+      'menu_name' => 'Álbums',
+    );
+
+    $args = array(
+      'labels' => $labels,
+      'hierarchical' => true,
+      'supports' => array( 'title', 'thumbnail' ),
+      'public' => true,
+      'show_ui' => true,
+      'show_in_menu' => true,
+      'menu_position' => 5,
+      'menu_icon' => 'dashicons-camera',
+      'show_in_nav_menus' => false,
+      'publicly_queryable' => false,
+      'exclude_from_search' => false,
+      'has_archive' => true,
+      'query_var' => true,
+      'can_export' => true,
+      'rewrite' => true,
+      'capability_type' => 'post'
+    );
+
+    register_post_type( 'album', $args );
   }
 
   function register_taxonomies() {
-    //this is where you can register custom taxonomies
+    $labels = array(
+      'name' => 'Tipo de Evento',
+      'singular_name' => 'Tipo de Evento',
+      'search_items' => 'Buscar Tipos de Eventos',
+      'all_items' => 'Todos Tipos de Eventos',
+      'edit_item' => 'Editar Tipo de Evento',
+      'update_item' => 'Atualizar Tipo de Evento',
+      'add_new_item' => 'Adicionar novo Tipo de Evento',
+      'new_item_name' => 'Nome do novo Tipo de Evento',
+      'menu_name' => 'Tipo de Evento',
+    );
+
+    $args = array(
+      'hierarchical' => false,
+      'labels' => $labels,
+      'show_ui' => true,
+      'show_admin_column' => true,
+      'query_var' => true,
+      'rewrite' => array( 'slug' => 'evento' ),
+    );
+    register_taxonomy( 'evento', array( 'album' ), $args );
   }
 
   function add_to_context( $context ) {

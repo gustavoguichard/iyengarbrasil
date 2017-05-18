@@ -1,0 +1,9 @@
+{% if post.get_field('footer_image') %}
+  <section class="sct-parallax" style="background-image: url({{TimberImage(post.get_field('footer_image')).src}})">
+    {% if post.get_field('footer_content') %}
+      <div class="container">
+        <h3>{{post.get_field('footer_content')}}</h3>
+      </div>
+    {% endif %}
+  </section>
+{% endif %}

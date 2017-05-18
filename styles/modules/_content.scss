@@ -68,7 +68,7 @@
   }
 }
 
-.main-content {
+.single-post .main-content {
   position: relative;
 
   p, h1, h2, h3, h4, h5, h6 {
@@ -90,4 +90,8 @@
     top: 0;
     width: 100%;
   }
+}
+
+.nf-form-fields-required {
+  display: none;
 }

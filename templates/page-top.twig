@@ -1,0 +1,30 @@
+{% if post.get_field('top_style') == 'Texto' %}
+  <div id="{{post.slug}}" class="section-header">
+    <div class="container">
+      <h1 class="header-title">{{post.title}}</h1>
+    </div>
+  </div>
+{% elseif post.get_field('top_style') == 'Imagem' %}
+  <section class="sct-parallax  main-header" style="background-image: url({{TimberImage(post.get_field('top_image')).src}})">
+    <div class="container">
+      <h1>{{post.title}}</h1>
+      {% if post.get_field('top_subtitle') %}
+        <h4>{{post.get_field('top_subtitle')}}</h4>
+      {% endif %}
+    </div>
+  </section>
+{% elseif post.get_field('top_style') == 'Slider' %}
+  <section class="sct-slideshow sct-parallax main-header" data-time="5">
+    <div class="images-container">
+      {% for image in slider_images %}
+        <div class="slider-img" style="background-image: url({{TimberImage(image).src}})"></div>
+      {% endfor %}
+    </div>
+    <div class="container">
+      <h1>{{post.title}}</h1>
+      {% if post.get_field('top_subtitle') %}
+        <h4>{{post.get_field('top_subtitle')}}</h4>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

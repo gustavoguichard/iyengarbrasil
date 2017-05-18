@@ -20,7 +20,7 @@ export default class MainItem {
   update({ currentSection }) {
     this.hash === currentSection
       ? $(this.el).addClass('active')
-      : $(this.el).removeClass('active')
+      : $(this.el).removeClass('active current-menu-item')
   }
 
   listeners() {

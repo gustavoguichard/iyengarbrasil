@@ -1,0 +1,37 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <section id="{{post.slug}}" class="sct-slideshow sct-parallax main-header" data-time="5">
+    <div class="images-container">
+      {% for image in slider_images %}
+        <div class="slider-img" style="background-image: url({{TimberImage(image).src}})"></div>
+      {% endfor %}
+    </div>
+    <nav class="header-menu">
+      <img src="{{theme.link}}/images/logo-200x200.png" alt="Logo Iyengar" class="logo" />
+      {% include "menu.twig" with {'menu': menu.get_items} %}
+    </nav>
+  </section>
+  <div id="centro" class="section-header no-margin">
+    <div class="container">
+      <h1 class="header-title">{{post.title}}</h1>
+    </div>
+  </div>
+  <img class="mobile-hidden" src="{{theme.link}}/images/barra-iyengar.jpg" />
+  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+    <section class="row content-section">
+      <div class="three columns">
+        <img class="align-center photo" src="{{theme.link}}/images/faeqji-pe-e-cami.jpg" alt="Faeqji, Pedro e Cami">
+      </div>
+      <div class="nine columns text-highlight">
+        {{post.content}}
+        <img class="mobile-hidden" src="{{theme.link}}/images/pedro-cami-praticando.jpg" alt="Pedro e Cami praticando">
+      </div>
+    </section>
+  </article>
+  {% include "page-footer.twig" %}
+  {% for section in sections %}
+    {% include "page-no-footer.twig" with {'post': section} %}
+  {% endfor %}
+  {% include 'footer.twig' %}
+{% endblock %}
