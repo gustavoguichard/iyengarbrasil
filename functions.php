@@ -33,12 +33,23 @@ class StarterSite extends TimberSite {
     add_shortcode('gallery', array( $this, 'parse_gallery_shortcode') );
     add_shortcode('painel', array( $this, 'accordeon_cb' ) );
     add_shortcode('aba', array( $this, 'accordeon_section_cb' ) );
+    add_shortcode('video', array( $this, 'video_cb' ) );
     add_shortcode('citacao', array( $this, 'blockquote_cb' ) );
 		parent::__construct();
 	}
 
   function accordeon_cb($atts, $content = null) {
     return '<div class="accordeon">' . do_shortcode($content) .'</div>';
+  }
+
+  function video_cb($atts, $content = null) {
+    return '<div class="row">
+              <div class="columns seven">
+                <div class="responsive-video">
+                ' . $content . '
+                </div>
+              </div>
+            </div>';
   }
 
   function blockquote_cb($atts, $content = null) {

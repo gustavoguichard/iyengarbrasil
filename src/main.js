@@ -14,6 +14,7 @@ import Parallax from './components/Parallax'
 import Photo from './components/Photo'
 import SectionHeader from './components/SectionHeader'
 import Slider from './components/Slider'
+import Table from './components/Table'
 
 class Site {
   constructor(window) {
@@ -42,6 +43,7 @@ const COMPONENTS = {
   'img.photo': Photo,
   '.sct-slideshow': Slider,
   '.section-header[id], #home': SectionHeader,
+  '.tablepress': Table,
 }
 
 $(jQuery => new Site(window))
