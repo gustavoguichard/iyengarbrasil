@@ -1,6 +1,10 @@
 import $ from 'jquery'
 
 export default class ButtonCTA {
+  static get selector() {
+    return '.bt-cta'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store

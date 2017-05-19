@@ -1,10 +1,14 @@
 import $ from 'jquery'
 import { map, uniqueId, find } from 'lodash'
-import * as isMobile from '../utils/isMobile'
+import isMobile from '../utils/isMobile'
 import { scrollToElm } from '../utils/scroll'
 import { classNames } from '../utils/helpers'
 
 export default class Accordeon {
+  static get selector() {
+    return '.accordeon'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store
@@ -16,7 +20,7 @@ export default class Accordeon {
 
   mount() {
     this.id = uniqueId()
-    this.mobile = isMobile.any()
+    this.mobile = isMobile()
 
     const classes = classNames({
       desktop: !this.mobile,

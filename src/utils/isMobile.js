@@ -8,7 +8,7 @@ export const Opera = () => navigator.userAgent.match(/Opera Mini/i)
 
 export const Windows = () => navigator.userAgent.match(/IEMobile/i)
 
-export const any = () => (
+export default () => (
   Android() ||
   BlackBerry() ||
   iOS() ||

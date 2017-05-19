@@ -1,11 +1,15 @@
 import $ from 'jquery'
-import * as isMobile from '../utils/isMobile'
+import isMobile from '../utils/isMobile'
 
 export default class Parallax {
+  static get selector() {
+    return '.sct-parallax'
+  }
+
   constructor(el, store) {
     this.el = $(el)
     this.el.prepend('<div class="parallax-cover" />')
 
-    isMobile.any() && this.el.addClass('mobile')
+    isMobile() && this.el.addClass('mobile')
   }
 }

@@ -3,6 +3,10 @@ import { debounce } from 'lodash'
 import visibility from '../utils/visibility'
 
 export default class BodyControls {
+  static get selector() {
+    return 'body'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store

@@ -1,6 +1,10 @@
 import { isAbove } from '../utils/scroll'
 
-export default class MainMenu {
+export default class MainHeader {
+  static get selector() {
+    return '.main-header'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store

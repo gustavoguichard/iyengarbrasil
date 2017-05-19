@@ -2,7 +2,12 @@ import $ from 'jquery'
 import { debounce, split, startsWith } from 'lodash'
 import { scrollToId } from '../utils/scroll'
 
-export default class MainItem {
+export default class MenuItem {
+  static get selector() {
+    const item = '.menu-item[href^="#"]'
+    return `.main-menu ${item}, .header-menu ${item}`
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store

@@ -3,6 +3,10 @@ import { mapValues } from 'lodash'
 import { classNames, not } from '../utils/helpers'
 
 export default class MainMenu {
+  static get selector() {
+    return '.main-menu'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store

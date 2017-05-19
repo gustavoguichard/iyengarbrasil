@@ -1,6 +1,10 @@
 import { isBelow } from '../utils/scroll'
 
 export default class SectionHeader {
+  static get selector() {
+    return '.section-header[id], #home'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store

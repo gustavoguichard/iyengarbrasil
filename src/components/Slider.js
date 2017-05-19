@@ -2,6 +2,10 @@ import $ from 'jquery'
 import { floor } from 'lodash'
 
 export default class Slider {
+  static get selector() {
+    return '.sct-slideshow'
+  }
+
   constructor(el, store) {
     this.el = el
     this.store = store
