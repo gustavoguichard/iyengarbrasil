@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {% include "page-top.twig" %}
+  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+    {{post.content}}
+    {% for group in album_groups %}
+      <h3>{{group[0]}}</h3>
+      {% for album in group[1] %}
+        <div class="album-wrapper">
+          <div class="album-cover photo"><a href="{{album.link}}"><img src="{{album.thumbnail.src}}"></a></div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </article>
+  {% include "page-footer.twig" %}
+  {% include 'footer.twig' %}
+{% endblock %}

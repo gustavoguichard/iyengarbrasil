@@ -147,7 +147,6 @@ class StarterSite extends TimberSite {
       'menu_position' => 5,
       'menu_icon' => 'dashicons-camera',
       'show_in_nav_menus' => false,
-      'publicly_queryable' => false,
       'exclude_from_search' => false,
       'has_archive' => true,
       'query_var' => true,

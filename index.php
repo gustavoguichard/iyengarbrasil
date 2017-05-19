@@ -14,8 +14,13 @@
  */
 
 $context = Timber::get_context();
-$context['posts'] = Timber::get_posts();
-// $context['foo'] = 'bar';
+$args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
+$post = new TimberPost('atividades');
+$context['slider_images'] = acf_photo_gallery('top_slider_images', $post->ID);
+$context['post'] = $post;
+$posts = Timber::get_posts($args);
+array_push($posts, new TimberPost('retiros'));
+$context['posts'] = $posts;
 $templates = array( 'index.twig' );
 if ( is_home() ) {
 	array_unshift( $templates, 'home.twig' );

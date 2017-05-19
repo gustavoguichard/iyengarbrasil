@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <section class="sct-slideshow sct-parallax" data-time="5">
+    <div class="images-container">
+    {% for image in gallery|slice(0, 5) %}
+      <div class="slider-img" style="background-image: url({{image.src}})"></div>
+    {% endfor %}
+    </div>
+    <div class="container">
+      <h1>{{post.title}}</h1>
+    </div>
+  </section>
+  <article class="container content-section album-container">
+    {% for image in gallery %}
+      <a data-fancybox="gallery" data-caption="{{image.caption}}" href="{{image.src('full')}}"><img class="photo" src="{{image.src('thumbnail')}}"></a>
+    {% endfor %}
+  </article>
+  {% include 'footer.twig' %}
+{% endblock %}
