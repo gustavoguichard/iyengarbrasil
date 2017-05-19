@@ -13,11 +13,18 @@
  * @since   Timber 0.1
  */
 
+function timber_post($single) {
+  return new TimberPost($single);
+}
+
 $context = Timber::get_context();
-$args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
-$post = new TimberPost('atividades');
+$post = new TimberPost('home');
+$sections = array_map('timber_post', ['aulas-regulares', 'contato']);
+$context['sections'] = $sections;
 $context['slider_images'] = acf_photo_gallery('top_slider_images', $post->ID);
+$context['menu'] = new TimberMenu('home-main-menu');
 $context['post'] = $post;
+$args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
 $posts = Timber::get_posts($args);
 array_push($posts, new TimberPost('retiros'));
 $context['posts'] = $posts;
