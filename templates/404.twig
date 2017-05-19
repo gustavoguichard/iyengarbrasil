@@ -1,6 +1,7 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-	Sorry, we couldn't find what you're looking for.
+  {% include "page-top.twig" with {'show_menu': true} %}
+  {% include "page-bottom.twig" %}
   {% include 'footer.twig' %}
 {% endblock %}

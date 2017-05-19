@@ -1,5 +1,5 @@
 {% if post.get_field('top_style') == 'Imagem' %}
-  <section class="sct-parallax  main-header" style="background-image: url({{TimberImage(post.get_field('top_image')).src}})">
+  <section class="sct-parallax {{show_menu ? '' : 'main-header'}}" style="background-image: url({{TimberImage(post.get_field('top_image')).src}})">
     <div class="container">
       <h1>{{post.title}}</h1>
       {% if post.get_field('top_subtitle') %}
@@ -8,7 +8,7 @@
     </div>
   </section>
 {% elseif post.get_field('top_style') == 'Slider' %}
-  <section class="sct-slideshow sct-parallax main-header" data-time="5">
+  <section class="sct-slideshow sct-parallax  {{show_menu ? '' : 'main-header'}}" data-time="5">
     <div class="images-container">
       {% for image in post.id|make_gallery('top_slider_images') %}
         <div class="slider-img" style="background-image: url({{TimberImage(image).src}})"></div>
