@@ -3,7 +3,7 @@
 {% block content %}
   <section id="{{post.slug}}" class="sct-slideshow sct-parallax main-header" data-time="5">
     <div class="images-container">
-      {% for image in slider_images %}
+      {% for image in post.id|make_gallery('top_slider_images') %}
         <div class="slider-img" style="background-image: url({{TimberImage(image).src}})"></div>
       {% endfor %}
     </div>

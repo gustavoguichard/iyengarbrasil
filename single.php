@@ -12,6 +12,5 @@
 $context = Timber::get_context();
 $post = Timber::query_post();
 $context['post'] = $post;
-$context['slider_images'] = acf_photo_gallery('top_slider_images', $post->ID);
 
 Timber::render( array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' ), $context );

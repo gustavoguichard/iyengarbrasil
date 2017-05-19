@@ -170,14 +170,23 @@ class StarterSite extends TimberSite {
   }
 
   function add_to_context( $context ) {
-    $context['menu'] = new TimberMenu('main-menu');
+    $menu_name = is_front_page() ? 'home-main-menu' : 'main-menu';
+    $context['evento_terms'] = Timber::get_terms('evento', array('parent' => 0));
+    $context['menu'] = new TimberMenu($menu_name);
     $context['site'] = $this;
     return $context;
   }
 
+  function make_gallery($id, $field) {
+    return array_map(
+      'timber_image',
+      acf_photo_gallery($field, $id)
+    );
+  }
+
   function add_to_twig( $twig ) {
     $twig->addExtension( new Twig_Extension_StringLoader() );
-    // $twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
+    $twig->addFilter('make_gallery', new Twig_SimpleFilter('make_gallery', array($this, 'make_gallery')));
     return $twig;
   }
 
@@ -237,7 +246,7 @@ function timber_post($single) {
 function index_loop() {
   $args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
   $posts = Timber::get_posts($args);
-  array_push($posts, new TimberPost('retiros'));
+  array_push($posts, new TimberTerm('retiros'));
   return $posts;
 }
 // =========================================================================
