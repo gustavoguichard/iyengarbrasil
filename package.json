@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build:dev",
     "build:dev": "./node_modules/webpack/bin/webpack.js --config ./webpack-dev.config.js --progress --color --watch",
-    "build:prod": "./node_modules/webpack/bin/webpack.js --config ./webpack-prod.config.js --optimize-minimize --color && ruby build-html.rb",
+    "build:prod": "./node_modules/webpack/bin/webpack.js --config ./webpack-prod.config.js --optimize-minimize --color",
     "test": "./node_modules/karma/bin/karma start",
     "onetest": "./node_modules/karma/bin/karma start --single-run"
   },
