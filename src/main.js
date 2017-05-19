@@ -18,8 +18,7 @@ import Table from './components/Table'
 
 class Site {
   constructor(window) {
-    $('html').addClass('js')
-
+    document.documentElement.classList.add('js')
     this.initComponents()
   }
 

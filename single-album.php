@@ -9,10 +9,6 @@
  * @since    Timber 0.1
  */
 
-function timber_image($image) {
-  return new TimberImage($image);
-}
-
 $context = Timber::get_context();
 $post = Timber::query_post();
 $context['post'] = $post;

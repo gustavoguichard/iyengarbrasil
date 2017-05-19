@@ -1,7 +1,5 @@
-.cta-section {
-  &.js {
-    display: none;
-  }
+.js .cta-section {
+  display: none;
 }
 
 .button.bt-cta {
@@ -10,7 +8,7 @@
   height: auto;
   padding: .5em 1em;
 
-  &.js {
+  .js & {
     visibility: visible;
   }
 }

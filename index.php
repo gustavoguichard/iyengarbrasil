@@ -13,23 +13,10 @@
  * @since   Timber 0.1
  */
 
-function timber_post($single) {
-  return new TimberPost($single);
-}
-
 $context = Timber::get_context();
-$post = new TimberPost('home');
-$sections_top = array_map('timber_post', ['centro']);
-$sections_bottom = array_map('timber_post', ['aulas-regulares', 'contato']);
-$context['sections_top'] = $sections_top;
-$context['sections_bottom'] = $sections_bottom;
-$context['slider_images'] = acf_photo_gallery('top_slider_images', $post->ID);
-$context['menu'] = new TimberMenu('home-main-menu');
+$post = new TimberPost('atividades');
 $context['post'] = $post;
-$args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
-$posts = Timber::get_posts($args);
-array_push($posts, new TimberPost('retiros'));
-$context['posts'] = $posts;
+$context['posts'] = index_loop();
 $templates = array( 'index.twig' );
 if ( is_home() ) {
 	array_unshift( $templates, 'home.twig' );

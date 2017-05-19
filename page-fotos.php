@@ -7,10 +7,6 @@
  * @since Iyengar Brasil 1.0
  */
 
-function timber_post($single) {
-  return new TimberPost($single);
-}
-
 function make_album($term) {
   $albums = array_map('timber_post', get_posts(array(
     'posts_per_page' => -1,

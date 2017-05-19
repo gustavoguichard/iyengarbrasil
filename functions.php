@@ -25,15 +25,6 @@ class StarterSite extends TimberSite {
     add_filter( 'timber_context', array( $this, 'add_to_context' ) );
     add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
     add_filter('the_content', array( $this, 'wpex_fix_shortcodes') );
-    // all actions related to emojis
-    remove_action( 'admin_print_styles', 'print_emoji_styles' );
-    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-    remove_action( 'wp_print_styles', 'print_emoji_styles' );
-    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
     add_action( 'admin_menu', array( $this, 'remove_menus' ) );
@@ -78,9 +69,7 @@ class StarterSite extends TimberSite {
   }
 
   function blockquote_cb($atts, $content = null) {
-    extract(shortcode_atts(array(
-      "autor" => '' // default URL
-    ), $atts));
+    extract(shortcode_atts(array("autor" => ''), $atts));
     return '<blockquote class="blockquote">
               <p>' . $content . '</p>
               <footer class="blockquote-footer">'. $autor . '</footer>
@@ -88,9 +77,7 @@ class StarterSite extends TimberSite {
   }
 
   function accordeon_section_cb($atts, $content = null) {
-    extract(shortcode_atts(array(
-      "titulo" => '' // default URL
-    ), $atts));
+    extract(shortcode_atts(array("titulo" => ''), $atts));
     return '<article class="acd-section">
               <header class="acd-header">'.$titulo.'</header>
                 <div class="acd-content">'.$content.'</div>
@@ -183,23 +170,14 @@ class StarterSite extends TimberSite {
   }
 
   function add_to_context( $context ) {
-    // $context['foo'] = 'bar';
-    // $context['stuff'] = 'I am a value set in your functions.php file';
-    // $context['notes'] = 'These values are available everytime you call Timber::get_context();';
     $context['menu'] = new TimberMenu('main-menu');
     $context['site'] = $this;
     return $context;
   }
 
-  function myfoo( $text ) {
-    $text .= ' bar!';
-    return $text;
-  }
-
   function add_to_twig( $twig ) {
-    /* this is where you can add your own functions to twig */
     $twig->addExtension( new Twig_Extension_StringLoader() );
-    $twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
+    // $twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
     return $twig;
   }
 
@@ -223,12 +201,12 @@ class StarterSite extends TimberSite {
       'orderby' => $orderby
     );
 
-    // if ( !empty($include) )
-    $args['include'] = $include;
-    // else {
-    //   $args['post_parent'] = $id;
-    //   $args['numberposts'] = -1;
-    // }
+    if ( !empty($include) )
+      $args['include'] = $include;
+    else {
+      $args['post_parent'] = $id;
+      $args['numberposts'] = -1;
+    }
 
     $images = get_posts($args);
     $template = '<div class="album-container">';
@@ -247,5 +225,42 @@ class StarterSite extends TimberSite {
   }
 
 }
+
+function timber_image($image) {
+  return new TimberImage($image);
+}
+
+function timber_post($single) {
+  return new TimberPost($single);
+}
+
+function index_loop() {
+  $args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
+  $posts = Timber::get_posts($args);
+  array_push($posts, new TimberPost('retiros'));
+  return $posts;
+}
+// =========================================================================
+// REMOVE JUNK FROM HEAD
+// =========================================================================
+remove_action('wp_head', 'rsd_link'); // remove really simple discovery link
+remove_action('wp_head', 'wp_generator'); // remove wordpress version
+remove_action('wp_head', 'feed_links', 2); // remove rss feed links (make sure you add them in yourself if youre using feedblitz or an rss service)
+remove_action('wp_head', 'feed_links_extra', 3); // removes all extra rss feed links
+remove_action('wp_head', 'index_rel_link'); // remove link to index page
+remove_action('wp_head', 'wlwmanifest_link'); // remove wlwmanifest.xml (needed to support windows live writer)
+remove_action('wp_head', 'start_post_rel_link', 10, 0); // remove random post link
+remove_action('wp_head', 'parent_post_rel_link', 10, 0); // remove parent post link
+remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // remove the next and previous post links
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
+remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0 );
+// all actions related to emojis
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 
 new StarterSite();

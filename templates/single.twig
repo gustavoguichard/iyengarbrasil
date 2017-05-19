@@ -1,4 +1,4 @@
-{% extends "base.twig" %}
+{% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
   {% include "page-top.twig" %}
@@ -15,6 +15,6 @@
       </aside>
     {% endif %}
   </article>
-  {% include "page-footer.twig" %}
+  {% include "page-bottom.twig" %}
   {% include 'footer.twig' %}
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Retiros Page
+ * Template Name: Home Page
  *
  * @package WordPress
  * @subpackage Iyengar Brasil
@@ -9,14 +9,10 @@
 
 $context = Timber::get_context();
 $post = new TimberPost();
+$sections = array_map('timber_post', ['atividades', 'aulas-regulares', 'contato']);
+$context['sections'] = $sections;
 $context['slider_images'] = acf_photo_gallery('top_slider_images', $post->ID);
-
-$retiros = array_map('timber_post', get_posts(array(
-  'post_type' => 'post',
-  'category_name' => 'retiros',
-  'orderby' => 'date',
-  'order' => 'DESC'
-)));
-$context['retiros'] = $retiros;
+$context['menu'] = new TimberMenu('home-main-menu');
 $context['post'] = $post;
+$context['posts'] = index_loop();
 Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );

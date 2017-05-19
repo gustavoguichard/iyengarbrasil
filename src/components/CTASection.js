@@ -6,13 +6,7 @@ export default class CTASection {
     this.el = el
     this.store = store
 
-    this.mount()
-
     store.subscribe(this.update.bind(this), 'ctaOpen')
-  }
-
-  mount() {
-    this.el.classList.add('js')
   }
 
   update({ ctaOpen }) {
