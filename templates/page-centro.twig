@@ -1,0 +1,19 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {% include "page-top.twig" %}
+  <img class="mobile-hidden" src="{{theme.link}}/images/barra-iyengar.jpg" />
+  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+    <section class="row content-section">
+      <div class="three columns">
+        <img class="align-center photo" src="{{theme.link}}/images/faeqji-pe-e-cami.jpg" alt="Faeqji, Pedro e Cami">
+      </div>
+      <div class="nine columns text-highlight">
+        <img class="mobile-hidden" src="{{theme.link}}/images/pedro-cami-praticando.jpg" alt="Pedro e Cami praticando">
+        {{post.content}}
+      </div>
+    </section>
+  </article>
+  {% include "page-footer.twig" %}
+  {% include 'footer.twig' %}
+{% endblock %}

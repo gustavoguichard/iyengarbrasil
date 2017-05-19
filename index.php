@@ -19,8 +19,10 @@ function timber_post($single) {
 
 $context = Timber::get_context();
 $post = new TimberPost('home');
-$sections = array_map('timber_post', ['aulas-regulares', 'contato']);
-$context['sections'] = $sections;
+$sections_top = array_map('timber_post', ['centro']);
+$sections_bottom = array_map('timber_post', ['aulas-regulares', 'contato']);
+$context['sections_top'] = $sections_top;
+$context['sections_bottom'] = $sections_bottom;
 $context['slider_images'] = acf_photo_gallery('top_slider_images', $post->ID);
 $context['menu'] = new TimberMenu('home-main-menu');
 $context['post'] = $post;
