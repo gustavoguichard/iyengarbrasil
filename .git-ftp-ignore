@@ -1,0 +1,13 @@
+.DS_Store
+.log
+*.map
+src/
+styles/
+webpack-*.js
+tests.webpack.js
+karma.conf.js
+package.json
+.gitignore
+.git-ftp-ignore
+.editorconfig
+.babelrc

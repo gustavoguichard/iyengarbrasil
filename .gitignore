@@ -3,5 +3,3 @@ node_modules
 .log
 src/*.map
 src/*.bundle.js
-js/*.bundle.js
-css/main.css
