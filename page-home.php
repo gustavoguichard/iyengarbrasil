@@ -9,7 +9,7 @@
 
 $context = Timber::get_context();
 $post = new TimberPost();
-$sections = array_map('timber_post', ['atividades', 'aulas-regulares', 'contato']);
+$sections = array_map('timber_post', ['atividades', 'horarios', 'contato']);
 $context['sections'] = $sections;
 $context['post'] = $post;
 $context['posts'] = index_loop();
