@@ -24,7 +24,10 @@ class StarterSite extends TimberSite {
     add_filter( 'tablepress_use_default_css', '__return_false' );
     add_filter( 'timber_context', array( $this, 'add_to_context' ) );
     add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
-    add_filter('the_content', array( $this, 'wpex_fix_shortcodes') );
+    add_filter('the_content', array( $this, 'wpex_fix_shortcodes' ) );
+    add_action('init', array( $this, 'iyengar_unregister_tags' ) );
+    add_action( 'init', array( $this, 'change_post_object_label' ) );
+    add_action( 'admin_menu', array( $this, 'change_post_menu_label' ) );
     add_action( 'init', array( $this, 'register_post_types' ) );
     add_action( 'init', array( $this, 'register_taxonomies' ) );
     add_action( 'admin_menu', array( $this, 'remove_menus' ) );
@@ -42,6 +45,10 @@ class StarterSite extends TimberSite {
 
   function remove_menus() {
     remove_menu_page( 'edit-comments.php' );
+  }
+
+  function iyengar_unregister_tags() {
+    unregister_taxonomy_for_object_type('post_tag', 'post');
   }
 
   function wpex_fix_shortcodes($content){
@@ -107,6 +114,30 @@ class StarterSite extends TimberSite {
   function is_dev() {
     $url = get_site_url();
     return (substr( $url, 0, 16 ) === "http://localhost");
+  }
+
+  function change_post_menu_label() {
+    global $menu;
+    global $submenu;
+    $menu[5][0] = 'Atividades';
+    $submenu['edit.php'][5][0] = 'Atividades';
+    $submenu['edit.php'][10][0] = 'Adicionar Atividades';
+    echo '';
+  }
+
+  function change_post_object_label() {
+    global $wp_post_types;
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = 'Atividades';
+    $labels->singular_name = 'Atividade';
+    $labels->add_new = 'Adicionar Atividade';
+    $labels->add_new_item = 'Adicionar Atividade';
+    $labels->edit_item = 'Editar Atividades';
+    $labels->new_item = 'Atividade';
+    $labels->view_item = 'Ver Atividade';
+    $labels->search_items = 'Buscar Atividades';
+    $labels->not_found = 'Nenhuma Atividade encontrada';
+    $labels->not_found_in_trash = 'Nenhuma Atividade na Lixeira';
   }
 
   function register_post_types() {
