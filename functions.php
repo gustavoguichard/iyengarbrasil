@@ -98,7 +98,7 @@ class StarterSite extends TimberSite {
     }
 
     if(is_single()) {
-      wp_enqueue_style( 'iyengar_styles', get_template_directory_uri() . '/js/vendor/jquery.fancybox.min.css' );
+      wp_enqueue_style( 'fancybox_styles', get_template_directory_uri() . '/js/vendor/jquery.fancybox.min.css' );
     }
   }
 
