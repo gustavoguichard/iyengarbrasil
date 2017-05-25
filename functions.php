@@ -12,7 +12,7 @@ if ( ! class_exists( 'Timber' ) ) {
 	return;
 }
 
-Timber::$dirname = array('templates', 'views');
+Timber::$dirname = ['templates', 'views'];
 
 class StarterSite extends TimberSite {
 
@@ -22,22 +22,23 @@ class StarterSite extends TimberSite {
 		add_theme_support( 'menus' );
     add_filter( 'use_default_gallery_style', '__return_false' );
     add_filter( 'tablepress_use_default_css', '__return_false' );
-    add_filter( 'timber_context', array( $this, 'add_to_context' ) );
-    add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
-    add_filter('the_content', array( $this, 'wpex_fix_shortcodes' ) );
-    add_filter('post_gallery', array( $this, 'parse_gallery_shortcode' ), 10, 2);
-    add_action('init', array( $this, 'iyengar_unregister_tags' ) );
-    add_action( 'init', array( $this, 'change_post_object_label' ) );
-    add_action( 'admin_menu', array( $this, 'change_post_menu_label' ) );
-    add_action( 'init', array( $this, 'register_post_types' ) );
-    add_action( 'init', array( $this, 'register_taxonomies' ) );
-    add_action( 'admin_menu', array( $this, 'remove_menus' ) );
-    add_action( 'wp_enqueue_scripts', array( $this, 'add_theme_styles') );
-    add_action( 'wp_enqueue_scripts', array( $this, 'add_theme_scripts') );
-    add_shortcode('painel', array( $this, 'accordeon_cb' ) );
-    add_shortcode('aba', array( $this, 'accordeon_section_cb' ) );
-    add_shortcode('video', array( $this, 'video_cb' ) );
-    add_shortcode('citacao', array( $this, 'blockquote_cb' ) );
+    add_filter( 'timber_context', [$this, 'add_to_context']);
+    add_filter( 'get_twig', [$this, 'add_to_twig']);
+    add_filter('the_content', [$this, 'wpex_fix_shortcodes']);
+    add_filter('post_gallery', [$this, 'parse_gallery_shortcode'], 10, 2);
+    add_filter( 'wp_default_scripts', [$this, 'dequeue_jquery_migrate']);
+    add_action('init', [$this, 'iyengar_unregister_tags']);
+    add_action( 'init', [$this, 'change_post_object_label']);
+    add_action( 'admin_menu', [$this, 'change_post_menu_label']);
+    add_action( 'init', [$this, 'register_post_types']);
+    add_action( 'init', [$this, 'register_taxonomies']);
+    add_action( 'admin_menu', [$this, 'remove_menus']);
+    add_action( 'wp_enqueue_scripts', [$this, 'add_theme_styles']);
+    add_action( 'wp_enqueue_scripts', [$this, 'add_theme_scripts']);
+    add_shortcode('painel', [$this, 'accordeon_cb']);
+    add_shortcode('aba', [$this, 'accordeon_section_cb']);
+    add_shortcode('video', [$this, 'video_cb']);
+    add_shortcode('citacao', [$this, 'blockquote_cb']);
 
     parent::__construct();
   }
@@ -103,11 +104,18 @@ class StarterSite extends TimberSite {
 
   function add_theme_scripts() {
     if(is_single()) {
-      wp_enqueue_script( 'fancybox', get_template_directory_uri() . '/js/vendor/jquery.fancybox.min.js', array('jquery'), '1.0.0', true );
+      wp_enqueue_script( 'fancybox', get_template_directory_uri() . '/js/vendor/jquery.fancybox.min.js', ['jquery'], '1.0.0', true );
     }
 
     $folder = ($this->is_dev() ? '/src' : '/js');
-    wp_enqueue_script( 'iyengar_main', get_template_directory_uri() . $folder . '/main.bundle.js', array('jquery'), '1.0.0', true );
+    wp_enqueue_script( 'iyengar_main', get_template_directory_uri() . $folder . '/main.bundle.js', ['jquery'], '1.0.0', true );
+  }
+
+  function dequeue_jquery_migrate(&$scripts) {
+    if(!is_admin()){
+      $scripts->remove( 'jquery');
+      $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.12.4' );
+    }
   }
 
   function is_dev() {
@@ -157,7 +165,7 @@ class StarterSite extends TimberSite {
     $args = array(
       'labels' => $labels,
       'hierarchical' => true,
-      'supports' => array( 'title', 'thumbnail' ),
+      'supports' => ['title', 'thumbnail'],
       'public' => true,
       'show_ui' => true,
       'show_in_menu' => true,
@@ -196,7 +204,7 @@ class StarterSite extends TimberSite {
       'query_var' => true,
       'rewrite' => array( 'slug' => 'evento' ),
     );
-    register_taxonomy( 'evento', array( 'album' ), $args );
+    register_taxonomy( 'evento', ['album'], $args );
   }
 
   function add_to_context( $context ) {
@@ -216,7 +224,7 @@ class StarterSite extends TimberSite {
 
   function add_to_twig( $twig ) {
     $twig->addExtension( new Twig_Extension_StringLoader() );
-    $twig->addFilter('make_gallery', new Twig_SimpleFilter('make_gallery', array($this, 'make_gallery')));
+    $twig->addFilter('make_gallery', new Twig_SimpleFilter('make_gallery', [$this, 'make_gallery']));
     return $twig;
   }
 
@@ -244,7 +252,7 @@ class StarterSite extends TimberSite {
       $include = preg_replace('/[^0-9,]+/', '', $include);
       $_attachments = get_posts(array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby));
 
-      $attachments = array();
+      $attachments = [];
       foreach ($_attachments as $key => $val) {
         $attachments[$val->ID] = $_attachments[$key];
       }
