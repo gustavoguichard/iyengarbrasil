@@ -25,7 +25,7 @@ class StarterSite extends TimberSite {
     add_filter( 'timber_context', array( $this, 'add_to_context' ) );
     add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
     add_filter('the_content', array( $this, 'wpex_fix_shortcodes' ) );
-    add_filter('post_gallery', 'parse_gallery_shortcode', 10, 2);
+    add_filter('post_gallery', array( $this, 'parse_gallery_shortcode' ), 10, 2);
     add_action('init', array( $this, 'iyengar_unregister_tags' ) );
     add_action( 'init', array( $this, 'change_post_object_label' ) );
     add_action( 'admin_menu', array( $this, 'change_post_menu_label' ) );
