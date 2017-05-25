@@ -34,8 +34,6 @@ class StarterSite extends TimberSite {
     add_action( 'admin_menu', array( $this, 'remove_menus' ) );
     add_action( 'wp_enqueue_scripts', array( $this, 'add_theme_styles') );
     add_action( 'wp_enqueue_scripts', array( $this, 'add_theme_scripts') );
-    remove_shortcode('gallery');
-    add_shortcode('gallery', array( $this, 'parse_gallery_shortcode') );
     add_shortcode('painel', array( $this, 'accordeon_cb' ) );
     add_shortcode('aba', array( $this, 'accordeon_section_cb' ) );
     add_shortcode('video', array( $this, 'video_cb' ) );
@@ -222,49 +220,67 @@ class StarterSite extends TimberSite {
     return $twig;
   }
 
-  function parse_gallery_shortcode($atts) {
-    if ( ! empty( $atts['ids'] ) ) {
-      if ( empty( $atts['orderby'] ) )
-        $atts['orderby'] = 'post__in';
-      $atts['include'] = $atts['ids'];
+  function parse_gallery_shortcode($output, $attr) {
+    global $post;
+
+    if (isset($attr['orderby'])) {
+      $attr['orderby'] = sanitize_sql_orderby($attr['orderby']);
+      if (!$attr['orderby'])
+        unset($attr['orderby']);
     }
 
     extract(shortcode_atts(array(
-      'orderby' => 'menu_order ASC, ID ASC',
-      'include' => '',
+      'order' => 'ASC',
+      'orderby' => 'menu_order ID',
       'id' => $post->ID,
-    ), $atts));
+      'include' => '',
+      'exclude' => ''
+    ), $attr));
 
-    $args = array(
-      'post_type' => 'attachment',
-      'post_status' => 'inherit',
-      'post_mime_type' => 'image',
-      'orderby' => $orderby
-    );
+    $id = intval($id);
+    if ('RAND' == $order) $orderby = 'none';
 
-    if ( !empty($include) )
-      $args['include'] = $include;
-    else {
-      $args['post_parent'] = $id;
-      $args['numberposts'] = -1;
+    if (!empty($include)) {
+      $include = preg_replace('/[^0-9,]+/', '', $include);
+      $_attachments = get_posts(array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby));
+
+      $attachments = array();
+      foreach ($_attachments as $key => $val) {
+        $attachments[$val->ID] = $_attachments[$key];
+      }
     }
 
-    $images = get_posts($args);
-    $template = '<div class="album-container">';
-    foreach ( $images as $image ) {
-      $caption = $image->post_excerpt;
-      $thumb = wp_get_attachment_image_src($image->ID, 'thumbnail');
-      $photo = wp_get_attachment_image_src($image->ID, 'full');
-      $image_alt = get_post_meta($image->ID,'_wp_attachment_image_alt', true);
-      $template .= '<a data-fancybox="gallery" data-caption="'. $caption .'" ';
-      $template .= 'data-width="' . $photo[1] . '" ';
-      $template .= 'data-height="' . $photo[2] . '" ';
-      $template .= 'href="' . $photo[0] . '"><img class="photo" ';
-      $template .= 'src="'. $thumb[0] . '" width="150" height="150"></a>';
+    if (empty($attachments)) return '';
+
+    // Here's your actual output, you may customize it to your need
+    $output = '<div class="album-container">';
+
+    // Now you loop through each attachment
+    foreach ($attachments as $id => $attachment) {
+      // Fetch all data related to attachment
+      $img = wp_prepare_attachment_for_js($id);
+
+      // If you want a different size change 'large' to eg. 'medium'
+      $url = $img['sizes']['full']['url'];
+      $height = $img['sizes']['full']['height'];
+      $width = $img['sizes']['full']['width'];
+      $alt = $img['alt'];
+      $thumb = $img['sizes']['thumbnail']['url'];
+
+      // Store the caption
+      $caption = $img['caption'];
+
+      $output .= '<a data-fancybox="gallery" data-caption="'. $caption .'" ';
+      $output .= 'data-width="' . $width . '" ';
+      $output .= 'data-height="' . $height . '" ';
+      $output .= 'href="' . $url . '"><img class="photo" ';
+      $output .= 'src="'. $thumb . '" width="150" height="150" /></a>';
     }
-    return $template . '</div>';
+
+    $output .= '</div>';
+
+    return $output;
   }
-
 }
 
 function timber_image($image) {
