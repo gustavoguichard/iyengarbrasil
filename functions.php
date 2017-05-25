@@ -275,9 +275,8 @@ function timber_post($single) {
 }
 
 function index_loop() {
-  $args = 'post_type=post&numberposts=-1&category__not_in=1&orderby=date';
+  $args = 'post_type=post&numberposts=-1&orderby=date';
   $posts = Timber::get_posts($args);
-  array_push($posts, new TimberTerm('retiros'));
   return $posts;
 }
 // =========================================================================
