@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import $ from 'jquery'
-import { startsWith } from 'lodash'
 import { scrollToId } from '../utils/scroll'
 
 export default {

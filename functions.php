@@ -88,7 +88,7 @@ class StarterSite extends TimberSite {
 
   function accordeon_section_cb($atts, $content = null) {
     extract(shortcode_atts(array("titulo" => ''), $atts));
-    return '<aba content="'.$content.'" title="'.$titulo.'" ref="'.$titulo.'" key="'.$titulo.'" :mobile="mobile" :current-title="currentTitle" @selected="changeActive"></aba>';
+    return '<aba content="'.$content.'" title="'.$titulo.'" :mobile="mobile" :current-title="currentTitle" @selected="changeActive"></aba>';
   }
 
   function add_theme_styles() {
