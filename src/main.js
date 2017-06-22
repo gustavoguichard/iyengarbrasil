@@ -4,7 +4,6 @@ import { map } from 'lodash'
 import { createStore } from './utils/redux'
 import reducer from './utils/reducer'
 import * as Components from './components'
-import * as VueComp from './vuecomponents'
 
 Vue.mixin({ delimiters: ['${', '}'] })
 
@@ -16,11 +15,10 @@ class Site {
 
   initComponents() {
     const store = createStore(reducer)
-    window.vuecomponents = map(VueComp, component => {
-      return map($(component.selector), el => component.vm(el, store))
-    })
     map(Components, Component => {
-      map($(Component.selector), el => new Component(el, store))
+      return Component.vm
+        ? map($(Component.selector), el => Component.vm(el, store))
+        : map($(Component.selector), el => new Component(el, store))
     })
   }
 }

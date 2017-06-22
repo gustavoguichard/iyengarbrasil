@@ -2,7 +2,7 @@
 	<ul class="list-menu">
 	{% for item in menu %}
 		<li class="menu-item-wp">
-			<a class="{{item.classes | join(' ')}}" href="{{item.get_link}}">{{item.title}}</a>
+			<a class="{{item.classes | join(' ')}}" :class="{ active: active }" href="{{item.get_link}}" @click="clicked">{{item.title}}</a>
 		</li>
 	{% endfor %}
 	</ul>

@@ -27,6 +27,7 @@ export default {
   vm: (el, store) => {
     return new Vue({
       el,
+      name: 'Accordeon',
       data: {
         current: 0,
         titles: [],

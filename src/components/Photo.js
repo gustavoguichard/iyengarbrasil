@@ -6,6 +6,7 @@ export default {
   vm: (el, store) => {
     new Vue({
       el,
+      name: 'Photo',
       data: {
         styleObj: {
           transform: `rotate(${random(-20, 20) / 10}deg)`,
