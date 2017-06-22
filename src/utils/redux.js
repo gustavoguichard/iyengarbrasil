@@ -12,7 +12,7 @@ export const createStore = reducer => {
     state = reducer(state, action)
     const changed = filter(keys(state), key =>
       !isEqual(prevState[key], state[key]))
-    if(action.name && action.silent === undefined && process.env.NODE_ENV == 'development') {
+    if(false && action.name && action.silent === undefined && process.env.NODE_ENV == 'development') {
       consoleGroup(prevState, 'Prev State', 'green')
       consoleGroup(action, 'Action', '#f66')
       consoleGroup(state, 'Next State', '#f66')

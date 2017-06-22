@@ -13,7 +13,7 @@
   </section>
   <article class="container content-section album-container">
     {% for image in post.id|make_gallery('album_photos') %}
-      <a data-fancybox="gallery" data-caption="{{image.caption}}" href="{{image.src('full')}}"><img class="photo" src="{{image.src('thumbnail')}}"></a>
+      <a data-fancybox="gallery" data-caption="{{image.caption}}" href="{{image.src('full')}}"><img class="photo" src="{{image.src('thumbnail')}}" :style="styleObj"></a>
     {% endfor %}
   </article>
   {% include 'footer.twig' %}

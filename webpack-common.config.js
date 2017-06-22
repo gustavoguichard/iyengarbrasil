@@ -14,6 +14,11 @@ module.exports = {
   externals: {
     'jquery': 'jQuery',
   },
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js',
+    },
+  },
   devtool: 'source-map',
   module: {
     loaders: [

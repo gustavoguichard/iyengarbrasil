@@ -62,7 +62,10 @@ class StarterSite extends TimberSite {
   }
 
   function accordeon_cb($atts, $content = null) {
-    return '<div class="accordeon">' . do_shortcode($content) .'</div>';
+    return '<div class="accordeon" :class="{ desktop: !mobile, mobile: mobile }">'
+        . do_shortcode($content)
+        . '<div v-if="!mobile" class="acd-dynamic-content" v-html="content"></div>
+        </div>';
   }
 
   function video_cb($atts, $content = null) {
@@ -85,11 +88,7 @@ class StarterSite extends TimberSite {
 
   function accordeon_section_cb($atts, $content = null) {
     extract(shortcode_atts(array("titulo" => ''), $atts));
-    return '<article class="acd-section">
-              <header class="acd-header">'.$titulo.'</header>
-                <div class="acd-content">'.$content.'</div>
-              </header>
-            </article>';
+    return '<aba content="'.$content.'" title="'.$titulo.'" ref="'.$titulo.'" key="'.$titulo.'" :mobile="mobile" :current-title="currentTitle" @selected="changeActive"></aba>';
   }
 
   function add_theme_styles() {
@@ -281,7 +280,7 @@ class StarterSite extends TimberSite {
       $output .= '<a data-fancybox="gallery" data-caption="'. $caption .'" ';
       $output .= 'data-width="' . $width . '" ';
       $output .= 'data-height="' . $height . '" ';
-      $output .= 'href="' . $url . '"><img class="photo" ';
+      $output .= 'href="' . $url . '"><img class="photo"  :style="styleObj" ';
       $output .= 'src="'. $thumb . '" width="150" height="150" /></a>';
     }
 

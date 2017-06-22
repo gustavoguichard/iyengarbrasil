@@ -1,7 +1,6 @@
 import { isEmpty, map } from 'lodash'
 
 export const initState = {
-  accordeons: [],
   activeTab: false,
   currentSection: 'home',
   ctaOpen: false,
@@ -57,19 +56,6 @@ export default (state = initState, action) => {
       return {
         ...state,
         menuVisible: false,
-      }
-    case 'SUBSCRIBE_ACCORDEON':
-      return {
-        ...state,
-        accordeons: [ ...state.accordeons, { id: action.id, index: 0 } ]
-      }
-    case 'UPDATE_ACCORDEON':
-      return {
-        ...state,
-        accordeons: map(state.accordeons, (acc) => acc.id === action.id
-          ? { ...acc, index: action.index }
-          : acc
-        ),
       }
     case 'SHOW_FORMS':
       return {
