@@ -15,10 +15,17 @@ class Site {
 
   initComponents() {
     const store = createStore(reducer)
+    Vue.mixin({
+      created: function() {
+        this.$store = store
+      }
+    })
     map(Components, Component => {
-      return Component.vm
-        ? map($(Component.selector), el => Component.vm(el, store))
-        : map($(Component.selector), el => new Component(el, store))
+      map($(Component.selector), el => {
+        Component.vm
+          ? Component.vm(el)
+          : new Component(el, store)
+      })
     })
   }
 }

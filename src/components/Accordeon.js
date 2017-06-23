@@ -2,29 +2,11 @@ import Vue from 'vue'
 import { map } from 'lodash'
 import isMobile from '../utils/isMobile'
 import { scrollToElm } from '../utils/scroll'
-
-const Aba = Vue.component('aba', {
-  props: ['content', 'title', 'mobile', 'currentTitle'],
-  methods: {
-    selected: function({ target }) {
-      this.$emit('selected', target)
-    },
-  },
-  computed: {
-    isActive: function() {
-      return this.currentTitle === this.title
-    },
-  },
-  template: '\
-    <article class="acd-section" :class="{ active: isActive }">\
-      <header class="acd-header" @click="selected">${title}</header>\
-      <div class="acd-content" v-if="mobile && isActive" v-html="content" />\
-    </article>',
-})
+import AccordeonSection from '../vuecomponents/AccordeonSection'
 
 export default {
   selector: '.accordeon',
-  vm: (el, store) => {
+  vm: (el) => {
     return new Vue({
       el,
       name: 'Accordeon',
@@ -56,7 +38,7 @@ export default {
         this.titles = map(this.$children, 'title')
         this.contents = map(this.$children, 'content')
       },
-      components: { Aba },
+      components: { AccordeonSection },
     })
   }
 }

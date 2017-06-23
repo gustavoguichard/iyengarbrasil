@@ -7,9 +7,9 @@
 {% endblock %}
 
   <body class="{{body_class}}" data-template="base.twig">
-    <header class="main-menu menu-visible u-full-width">
+    <header class="main-menu u-full-width" :class="classObj">
       {% block header %}
-      <a href="#" class="menu-opener"><span class="hamburger"></span> Menu</a>
+      <a href="#" class="menu-opener" @click.prevent="toggleMenu"><span class="hamburger"></span> Menu</a>
       <div class="container">
         <a href="{{site.url}}" class="menu-logo img-replace">
           <h1>{{site.name}}</h1>
