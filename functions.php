@@ -64,7 +64,7 @@ class StarterSite extends TimberSite {
   function accordeon_cb($atts, $content = null) {
     return '<div class="accordeon" :class="{ desktop: !mobile, mobile: mobile }">'
         . do_shortcode($content)
-        . '<div v-if="!mobile" class="acd-dynamic-content" v-html="content"></div>
+        . '<div v-if="!mobile" class="acd-dynamic-content" v-html="currentContent"></div>
         </div>';
   }
 

@@ -12,8 +12,7 @@ export default {
       name: 'Accordeon',
       data: {
         current: 0,
-        titles: [],
-        contents: [],
+        contents: [{ title: '', content: 'Loading...' }],
         mobile: isMobile(),
       },
       methods: {
@@ -25,18 +24,18 @@ export default {
         },
       },
       computed: {
-        currentTitle: function() {
-          return this.titles[this.current]
+        titles: function() {
+          return map(this.contents, 'title')
         },
-        content: function() {
-          return this.contents.length
-            ? this.contents[this.current]
-            : 'Loading...'
+        currentTitle: function() {
+          return this.contents[this.current].title
+        },
+        currentContent: function() {
+          return this.contents[this.current].content
         }
       },
       mounted: function() {
-        this.titles = map(this.$children, 'title')
-        this.contents = map(this.$children, 'content')
+        this.contents = map(this.$children, ({ content, title }) => ({ content, title }))
       },
       components: { AccordeonSection },
     })
