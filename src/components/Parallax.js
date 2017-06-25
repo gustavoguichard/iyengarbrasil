@@ -23,7 +23,7 @@ export default {
             this.current = index
           }
         },
-        scrolled: function({  windowY, windowH, menuVisible }) {
+        scrolled: function({ windowY, windowH, menuVisible }) {
           const shouldHide = isAbove(this.$el, 150)
           const name = shouldHide ? 'HIDE_MENU' : 'SHOW_MENU'
           shouldHide === menuVisible && this.$store.dispatch({ name })

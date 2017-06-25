@@ -6,7 +6,6 @@ export const initState = {
   ctaOpen: false,
   menuOpen: false,
   menuVisible: true,
-  openForms: false,
   ticks: 0,
   windowH: 0,
   windowW: 0,
@@ -56,11 +55,6 @@ export default (state = initState, action) => {
       return {
         ...state,
         menuVisible: false,
-      }
-    case 'SHOW_FORMS':
-      return {
-        ...state,
-        openForms: true,
       }
     case 'WINDOW_SCROLLED':
       return {
