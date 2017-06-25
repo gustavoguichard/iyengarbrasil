@@ -22,6 +22,6 @@ export default Vue.component('menu-link', {
     },
   },
   mounted: function() {
-    this.$store.subscribe(this.update.bind(this), 'currentSection')
+    this.$store.subscribe(this.update, 'currentSection')
   },
 })

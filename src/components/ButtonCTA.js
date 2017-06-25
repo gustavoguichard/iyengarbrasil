@@ -1,32 +1,26 @@
-import $ from 'jquery'
+import Vue from 'vue'
 
-export default class ButtonCTA {
-  static get selector() {
-    return '.bt-cta'
-  }
-
-  constructor(el, store) {
-    this.el = el
-    this.store = store
-
-    this.mount()
-    this.listeners()
-
-    store.subscribe(this.update.bind(this), 'ctaOpen')
-  }
-
-  mount() {
-    this.el.classList.add('js')
-  }
-
-  listeners() {
-    $(this.el).on('click', ev => {
-      this.store.dispatch({ name: 'CTA_CLICKED' })
-      ev.preventDefault()
+export default {
+  selector: '.bt-cta',
+  vm: (el) => {
+    return new Vue({
+      el,
+      name: 'ButtonCTA',
+      data: {
+        show: true,
+      },
+      methods: {
+        clicked: function() {
+          this.$store.dispatch({ name: 'CTA_CLICKED' })
+        },
+        update: function({ ctaOpen }) {
+          this.show = !ctaOpen
+        },
+      },
+      mounted: function() {
+        this.show = !this.$store.getState().ctaOpen
+        this.$store.subscribe(this.update, 'ctaOpen')
+      },
     })
-  }
-
-  update({ ctaOpen }) {
-    ctaOpen && this.el.remove()
   }
 }

@@ -29,7 +29,7 @@ export default {
         },
       },
       mounted: function() {
-        this.$store.subscribe(this.update.bind(this), 'menuOpen', 'menuVisible')
+        this.$store.subscribe(this.update, 'menuOpen', 'menuVisible')
         this.update(this.$store.getState())
       },
       components: { MenuLink },

@@ -1,7 +1,7 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  <section id="{{post.slug}}" class="sct-parallax main-header" :class="{ mobile: mobile }" data-time="5">
+  <section id="{{post.slug}}" class="sct-parallax main-header" :class="{ mobile: mobile }" data-time="5" data-main="true">
     <div class="images-container">
       <transition-group name="slide" class="transition-wrapper">
       {% for image in post.id|make_gallery('top_slider_images') %}

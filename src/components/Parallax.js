@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { floor } from 'lodash'
 import isMobile from '../utils/isMobile'
+import { isAbove } from '../utils/scroll'
 import MenuLink from '../vuecomponents/MenuLink'
 
 export default {
@@ -21,7 +22,12 @@ export default {
           if(this.current !== index) {
             this.current = index
           }
-        }
+        },
+        scrolled: function({  windowY, windowH, menuVisible }) {
+          const shouldHide = isAbove(this.$el, 150)
+          const name = shouldHide ? 'HIDE_MENU' : 'SHOW_MENU'
+          shouldHide === menuVisible && this.$store.dispatch({ name })
+        },
       },
       computed: {
         isSlider: function () {
@@ -31,7 +37,10 @@ export default {
       mounted: function() {
         this.length = this.$el.getElementsByClassName('slider-img').length
         if(this.isSlider) {
-          this.$store.subscribe(this.update.bind(this), 'ticks')
+          this.$store.subscribe(this.update, 'ticks')
+        }
+        if(this.$el.dataset.main) {
+          this.$store.subscribe(this.scrolled, 'windowY', 'windowH')
         }
       },
       components: { MenuLink },
