@@ -8,24 +8,20 @@ export default {
       el,
       name: 'MainMenu',
       data: {
-        open: false,
-        visible: false,
+        classObj: {
+          'menu-open': false,
+          'menu-visible': false,
+        },
       },
       methods: {
         update: function({ menuOpen, menuVisible }) {
-          this.open = menuOpen
-          this.visible = menuVisible
+          this.classObj = {
+            'menu-open': menuOpen,
+            'menu-visible': menuVisible,
+          }
         },
         toggleMenu: function() {
           this.$store.dispatch({ name: 'TOGGLE_MENU' })
-        },
-      },
-      computed: {
-        classObj: function() {
-          return {
-            'menu-open': this.open,
-            'menu-visible': this.visible,
-          }
         },
       },
       mounted: function() {
