@@ -1,12 +1,15 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  <section class="sct-slideshow sct-parallax" data-time="5">
+  <section class="sct-parallax" :class="{ mobile: mobile }" data-time="5">
     <div class="images-container">
-    {% for image in (post.id|make_gallery('album_photos'))|slice(0, 5) %}
-      <div class="slider-img" style="background-image: url({{image.src}})"></div>
-    {% endfor %}
+      <transition-group name="slide" class="transition-wrapper">
+      {% for image in (post.id|make_gallery('album_photos'))|slice(0, 5) %}
+        <div key="{{loop.index}}" class="slider-img" v-show="current === {{loop.index - 1}}" style="background-image: url({{image.src}})"></div>
+      {% endfor %}
+      </transition-group>
     </div>
+    <div class="parallax-cover"></div>
     <div class="container">
       <h1>{{post.title}}</h1>
     </div>

@@ -1,16 +1,19 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  <section id="{{post.slug}}" class="sct-slideshow sct-parallax main-header" data-time="5">
+  <section id="{{post.slug}}" class="sct-parallax main-header" :class="{ mobile: mobile }" data-time="5">
     <div class="images-container">
+      <transition-group name="slide" class="transition-wrapper">
       {% for image in post.id|make_gallery('top_slider_images') %}
-        <div class="slider-img" style="background-image: url({{TimberImage(image).src}})"></div>
+        <div key="{{loop.index}}" class="slider-img" v-show="current === {{loop.index - 1}}" style="background-image: url({{TimberImage(image).src}})"></div>
       {% endfor %}
+      </transition-group>
     </div>
-    {# <nav class="header-menu">
+    <div class="parallax-cover"></div>
+    <nav class="header-menu">
       <img src="{{theme.link}}/images/logo-200x200.png" alt="Logo Iyengar" class="logo" />
       {% include "menu.twig" with {'menu': menu.get_items} %}
-    </nav> #}
+    </nav>
   </section>
   <div id="centro" class="section-header no-margin">
     <div class="container">
