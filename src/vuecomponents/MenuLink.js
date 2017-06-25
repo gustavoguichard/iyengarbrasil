@@ -8,7 +8,7 @@ export default Vue.component('menu-link', {
       active: false,
     }
   },
-  props: ['href', 'title', 'classes'],
+  props: ['href', 'title'],
   template: '<a :href="href" :class="{ active }" @click="clicked">${title}</a>',
   methods: {
     update: function({ currentSection }) {
