@@ -3,14 +3,7 @@
 {% block content %}
   <div id="{{post.slug}}"></div>
   <section class="sct-parallax main-header" :class="{ mobile: mobile }" data-main="true">
-    <div class="images-container">
-      <transition-group name="slide" class="transition-wrapper">
-      {% for image in post.id|make_gallery('top_slider_images') %}
-        <div key="{{loop.index}}" class="slider-img" v-show="current === {{loop.index - 1}}" style="background-image: url({{TimberImage(image).src}})"></div>
-      {% endfor %}
-      </transition-group>
-    </div>
-    <div class="parallax-cover"></div>
+    <slider images="{{top_images|join(',')}}"></slider>
     <nav class="header-menu">
       <img src="{{theme.link}}/images/logo-200x200.png" alt="Logo Iyengar" class="logo" />
       {% include "menu.twig" with {'menu': menu.get_items} %}

@@ -44,7 +44,7 @@
 
   .parallax-cover {
     background: url(../images/dotted-overlay.png) repeat 0 0;
-    z-index: 0;
+    z-index: 1;
   }
 
   @media (min-width: $tablet + 1) {

@@ -221,9 +221,17 @@ class StarterSite extends TimberSite {
     );
   }
 
+  function make_gallery_src($id, $field) {
+    return array_map(
+      'timber_image_src',
+      acf_photo_gallery($field, $id)
+    );
+  }
+
   function add_to_twig( $twig ) {
     $twig->addExtension( new Twig_Extension_StringLoader() );
     $twig->addFilter('make_gallery', new Twig_SimpleFilter('make_gallery', [$this, 'make_gallery']));
+    $twig->addFilter('make_gallery_src', new Twig_SimpleFilter('make_gallery_src', [$this, 'make_gallery_src']));
     return $twig;
   }
 
@@ -294,6 +302,10 @@ function timber_image($image) {
   return new TimberImage($image);
 }
 
+function timber_image_src($image) {
+  return timber_image($image)->src;
+}
+
 function timber_post($single) {
   return new TimberPost($single);
 }
@@ -303,6 +315,19 @@ function index_loop() {
   $posts = Timber::get_posts($args);
   return $posts;
 }
+
+function images_array($post, $field) {
+  $top_style = get_post_meta($post->id, 'top_style', true );
+  if($top_style == 'Imagem') {
+    return [TimberImage(post.get_field('top_image'))->src];
+  } else {
+    return array_map(
+      'timber_image_src',
+      acf_photo_gallery($field, $post->id)
+    );
+  }
+}
+
 // =========================================================================
 // REMOVE JUNK FROM HEAD
 // =========================================================================

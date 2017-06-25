@@ -1,13 +1,9 @@
 import Vue from 'vue'
 import $ from 'jquery'
 import { map } from 'lodash'
-import { createStore } from './utils/redux'
-import reducer from './utils/reducer'
 import store from './utils/store'
 import BodyControls from './BodyControls'
 import * as Components from './components'
-
-Vue.mixin({ delimiters: ['${', '}'] })
 
 class Site {
   constructor(window) {

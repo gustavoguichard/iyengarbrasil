@@ -6,18 +6,7 @@
   </div>
 {% else %}
   <section class="sct-parallax main-header" :class="{ mobile: mobile }" data-main="{{not show_menu}}">
-    <div class="images-container">
-      {% if post.get_field('top_style') == 'Imagem' %}
-        <div class="slider-img" style="background-image: url({{TimberImage(post.get_field('top_image')).src}})"></div>
-      {% elseif post.get_field('top_style') == 'Slider' %}
-        <transition-group name="slide" class="transition-wrapper">
-        {% for image in post.id|make_gallery('top_slider_images') %}
-          <div key="{{loop.index}}" class="slider-img" v-show="current === {{loop.index - 1}}" style="background-image: url({{TimberImage(image).src}})"></div>
-        {% endfor %}
-        </transition-group>
-      {% endif %}
-    </div>
-    <div class="parallax-cover"></div>
+    <slider images="{{top_images|join(',')}}"></slider>
     <div class="container">
       <h1>{{post.title}}</h1>
       {% if post.get_field('top_subtitle') %}

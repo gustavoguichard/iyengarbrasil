@@ -2,14 +2,7 @@
 
 {% block content %}
   <section class="sct-parallax" :class="{ mobile: mobile }">
-    <div class="images-container">
-      <transition-group name="slide" class="transition-wrapper">
-      {% for image in (post.id|make_gallery('album_photos'))|slice(0, 5) %}
-        <div key="{{loop.index}}" class="slider-img" v-show="current === {{loop.index - 1}}" style="background-image: url({{image.src}})"></div>
-      {% endfor %}
-      </transition-group>
-    </div>
-    <div class="parallax-cover"></div>
+    <slider images="{{ post.id|make_gallery_src('album_photos')|slice(0, 5)|join(',') }}"></slider>
     <div class="container">
       <h1>{{post.title}}</h1>
     </div>

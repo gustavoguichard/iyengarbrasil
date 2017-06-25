@@ -12,5 +12,5 @@
 $context = Timber::get_context();
 $post = Timber::query_post();
 $context['post'] = $post;
-
+$context['top_images'] = images_array($post, 'top_slider_images');
 Timber::render( array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' ), $context );

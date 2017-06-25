@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import { debounce } from 'lodash'
 import visibility from './utils/visibility'
-import { scrollToElm } from './utils/scroll'
 
 export default class BodyControls {
   constructor(store) {

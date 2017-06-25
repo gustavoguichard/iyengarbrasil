@@ -2,10 +2,12 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 import { scrollToId } from '../utils/scroll'
 
+const template = `<a :href="href" :class="{ active: isActive }" @click="clicked">{{title}}</a>`
+
 export default Vue.component('menu-link', {
+  template,
   name: 'MenuLink',
   props: ['href', 'title'],
-  template: '<a :href="href" :class="{ active: isActive }" @click="clicked">${title}</a>',
   computed: {
     ...mapState(['currentSection']),
     isActive() {
