@@ -1,7 +1,7 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  <section class="sct-parallax" :class="{ mobile: mobile }" data-time="5">
+  <section class="sct-parallax" :class="{ mobile: mobile }">
     <div class="images-container">
       <transition-group name="slide" class="transition-wrapper">
       {% for image in (post.id|make_gallery('album_photos'))|slice(0, 5) %}

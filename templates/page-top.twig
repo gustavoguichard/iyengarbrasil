@@ -5,7 +5,7 @@
     </div>
   </div>
 {% else %}
-  <section class="sct-parallax main-header" :class="{ mobile: mobile }" data-time="5" data-main="{{not show_menu}}">
+  <section class="sct-parallax main-header" :class="{ mobile: mobile }" data-main="{{not show_menu}}">
     <div class="images-container">
       {% if post.get_field('top_style') == 'Imagem' %}
         <div class="slider-img" style="background-image: url({{TimberImage(post.get_field('top_image')).src}})"></div>

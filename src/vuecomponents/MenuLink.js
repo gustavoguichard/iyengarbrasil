@@ -1,27 +1,26 @@
 import Vue from 'vue'
+import { mapState } from 'vuex'
 import { scrollToId } from '../utils/scroll'
 
 export default Vue.component('menu-link', {
   name: 'MenuLink',
-  data: function() {
-    return {
-      active: false,
-    }
-  },
   props: ['href', 'title'],
-  template: '<a :href="href" :class="{ active }" @click="clicked">${title}</a>',
-  methods: {
-    update: function({ currentSection }) {
-      this.active = this.$el.hash.substring(1) === currentSection
+  template: '<a :href="href" :class="{ active: isActive }" @click="clicked">${title}</a>',
+  computed: {
+    ...mapState(['currentSection']),
+    isActive() {
+      return this.currentSection === this.hash()
     },
-    clicked: function(event) {
-      this.$store.dispatch({ name: 'CLOSE_MENU' })
+  },
+  methods: {
+    hash() {
+      return this.$el ? this.$el.hash.substring(1) : ''
+    },
+    clicked(event) {
+      this.$store.commit('closeMenu')
       if(this.$props.href === this.$el.hash) {
-        scrollToId(this.$el.hash.substring(1))
+        scrollToId(this.hash())
       }
     },
-  },
-  mounted: function() {
-    this.$store.subscribe(this.update, 'currentSection')
   },
 })

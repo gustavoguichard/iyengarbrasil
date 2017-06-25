@@ -1,25 +1,26 @@
+import $ from 'jquery'
 import Vue from 'vue'
+import { mapState } from 'vuex'
 
 export default {
   selector: '.bt-cta',
-  vm: (el) => {
+  vm: (el, store) => {
     return new Vue({
-      el,
+      el, store,
       name: 'ButtonCTA',
-      data: {
-        show: true,
-      },
       methods: {
         clicked: function() {
-          this.$store.dispatch({ name: 'CTA_CLICKED' })
-        },
-        update: function({ ctaOpen }) {
-          this.show = !ctaOpen
+          this.$store.commit('ctaClicked')
+          $('.cta-section').slideDown('fast', function() {
+            scrollToElm(this, -60)
+          })
         },
       },
-      mounted: function() {
-        this.show = !this.$store.getState().ctaOpen
-        this.$store.subscribe(this.update, 'ctaOpen')
+      computed: {
+        ...mapState(['ctaOpen']),
+        show() {
+          return !this.ctaOpen
+        },
       },
     })
   }

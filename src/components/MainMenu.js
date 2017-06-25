@@ -1,32 +1,26 @@
 import Vue from 'vue'
+import { mapState } from 'vuex'
 import MenuLink from '../vuecomponents/MenuLink'
 
 export default {
   selector: '.main-menu',
-  vm: (el) => {
+  vm: (el, store) => {
     return new Vue({
-      el,
+      el, store,
       name: 'MainMenu',
-      data: {
-        classObj: {
-          'menu-open': false,
-          'menu-visible': false,
+      methods: {
+        toggleMenu: function() {
+          this.$store.commit('toggleMenu')
         },
       },
-      methods: {
-        update: function({ menuOpen, menuVisible }) {
-          this.classObj = {
-            'menu-open': menuOpen,
-            'menu-visible': menuVisible,
+      computed: {
+        ...mapState(['menuOpen', 'menuVisible']),
+        classObj() {
+          return {
+            'menu-open': this.menuOpen,
+            'menu-visible': this.menuVisible,
           }
         },
-        toggleMenu: function() {
-          this.$store.dispatch({ name: 'TOGGLE_MENU' })
-        },
-      },
-      mounted: function() {
-        this.$store.subscribe(this.update, 'menuOpen', 'menuVisible')
-        this.update(this.$store.getState())
       },
       components: { MenuLink },
     })
