@@ -24,4 +24,5 @@
 $context = Timber::get_context();
 $post = new TimberPost();
 $context['post'] = $post;
+$context['top_images'] = images_array($post, 'top_slider_images');
 Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );

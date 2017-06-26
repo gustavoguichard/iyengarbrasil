@@ -8,10 +8,44 @@
   font-weight: 700;
   justify-content: center;
   min-height: 400px;
+  overflow: hidden;
   padding-bottom: 3em;
   padding-top: 3em;
   position: relative;
   text-shadow: 1px 1px rgba(black, .5);
+
+  .images-container, .images-container *, .parallax-cover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .images-container {
+    z-index: -2;
+  }
+
+  .slider-img {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &.slide-enter-active, &.slide-leave-active {
+      transition: all 1.8s;
+    }
+
+    &.slide-enter, &.slide-leave-to {
+      opacity: 0;
+      transform: scale(1.02, 1.02);
+    }
+
+  }
+
+  .parallax-cover {
+    background: url(../images/dotted-overlay.png) repeat 0 0;
+    z-index: 1;
+  }
 
   @media (min-width: $tablet + 1) {
     & {
@@ -33,15 +67,5 @@
 
   &.mobile, &.mobile .slider-img {
     background-attachment: scroll;
-  }
-
-  .parallax-cover {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background: url(../images/dotted-overlay.png) repeat 0 0;
-    z-index: 0;
   }
 }

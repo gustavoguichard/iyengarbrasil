@@ -62,7 +62,10 @@ class StarterSite extends TimberSite {
   }
 
   function accordeon_cb($atts, $content = null) {
-    return '<div class="accordeon">' . do_shortcode($content) .'</div>';
+    return '<div class="accordeon" :class="{ desktop: !mobile, mobile: mobile }">'
+        . do_shortcode($content)
+        . '<div v-if="!mobile" class="acd-dynamic-content" v-html="currentContent"></div>
+        </div>';
   }
 
   function video_cb($atts, $content = null) {
@@ -85,11 +88,7 @@ class StarterSite extends TimberSite {
 
   function accordeon_section_cb($atts, $content = null) {
     extract(shortcode_atts(array("titulo" => ''), $atts));
-    return '<article class="acd-section">
-              <header class="acd-header">'.$titulo.'</header>
-                <div class="acd-content">'.$content.'</div>
-              </header>
-            </article>';
+    return '<accordeon-section content="'.htmlspecialchars($content, ENT_QUOTES).'" title="'.$titulo.'" :mobile="mobile" :current-title="currentTitle" @selected="changeActive"></accordeon-section>';
   }
 
   function add_theme_styles() {
@@ -222,9 +221,17 @@ class StarterSite extends TimberSite {
     );
   }
 
+  function make_gallery_src($id, $field) {
+    return array_map(
+      'timber_image_src',
+      acf_photo_gallery($field, $id)
+    );
+  }
+
   function add_to_twig( $twig ) {
     $twig->addExtension( new Twig_Extension_StringLoader() );
     $twig->addFilter('make_gallery', new Twig_SimpleFilter('make_gallery', [$this, 'make_gallery']));
+    $twig->addFilter('make_gallery_src', new Twig_SimpleFilter('make_gallery_src', [$this, 'make_gallery_src']));
     return $twig;
   }
 
@@ -281,7 +288,7 @@ class StarterSite extends TimberSite {
       $output .= '<a data-fancybox="gallery" data-caption="'. $caption .'" ';
       $output .= 'data-width="' . $width . '" ';
       $output .= 'data-height="' . $height . '" ';
-      $output .= 'href="' . $url . '"><img class="photo" ';
+      $output .= 'href="' . $url . '"><img class="photo"  :style="styleObj" ';
       $output .= 'src="'. $thumb . '" width="150" height="150" /></a>';
     }
 
@@ -295,6 +302,10 @@ function timber_image($image) {
   return new TimberImage($image);
 }
 
+function timber_image_src($image) {
+  return timber_image($image)->src;
+}
+
 function timber_post($single) {
   return new TimberPost($single);
 }
@@ -304,6 +315,19 @@ function index_loop() {
   $posts = Timber::get_posts($args);
   return $posts;
 }
+
+function images_array($post, $field) {
+  $top_style = get_post_meta($post->id, 'top_style', true );
+  if($top_style == 'Imagem') {
+    return [TimberImage(post.get_field('top_image'))->src];
+  } else {
+    return array_map(
+      'timber_image_src',
+      acf_photo_gallery($field, $post->id)
+    );
+  }
+}
+
 // =========================================================================
 // REMOVE JUNK FROM HEAD
 // =========================================================================

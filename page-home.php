@@ -13,4 +13,5 @@ $sections = array_map('timber_post', ['atividades', 'horarios', 'contato']);
 $context['sections'] = $sections;
 $context['post'] = $post;
 $context['posts'] = index_loop();
+$context['top_images'] = images_array($post, 'top_slider_images');
 Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );

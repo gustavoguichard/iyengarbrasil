@@ -1,19 +1,15 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  <section class="sct-slideshow sct-parallax" data-time="5">
-    <div class="images-container">
-    {% for image in (post.id|make_gallery('album_photos'))|slice(0, 5) %}
-      <div class="slider-img" style="background-image: url({{image.src}})"></div>
-    {% endfor %}
-    </div>
+  <section class="sct-parallax" :class="{ mobile: mobile }">
+    <slider images="{{ post.id|make_gallery_src('album_photos')|slice(0, 5)|join(',') }}"></slider>
     <div class="container">
       <h1>{{post.title}}</h1>
     </div>
   </section>
   <article class="container content-section album-container">
     {% for image in post.id|make_gallery('album_photos') %}
-      <a data-fancybox="gallery" data-caption="{{image.caption}}" href="{{image.src('full')}}"><img class="photo" src="{{image.src('thumbnail')}}"></a>
+      <a data-fancybox="gallery" data-caption="{{image.caption}}" href="{{image.src('full')}}"><img class="photo" src="{{image.src('thumbnail')}}" :style="styleObj"></a>
     {% endfor %}
   </article>
   {% include 'footer.twig' %}

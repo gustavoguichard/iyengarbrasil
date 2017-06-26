@@ -1,12 +1,9 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  <section id="{{post.slug}}" class="sct-slideshow sct-parallax main-header" data-time="5">
-    <div class="images-container">
-      {% for image in post.id|make_gallery('top_slider_images') %}
-        <div class="slider-img" style="background-image: url({{TimberImage(image).src}})"></div>
-      {% endfor %}
-    </div>
+  <div id="{{post.slug}}"></div>
+  <section class="sct-parallax main-header" :class="{ mobile: mobile }" data-main="true">
+    <slider images="{{top_images|join(',')}}"></slider>
     <nav class="header-menu">
       <img src="{{theme.link}}/images/logo-200x200.png" alt="Logo Iyengar" class="logo" />
       {% include "menu.twig" with {'menu': menu.get_items} %}
@@ -21,7 +18,7 @@
   <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
     <section class="row content-section">
       <div class="three columns">
-        <img class="align-center photo" src="{{theme.link}}/images/faeqji-pe-e-cami.jpg" alt="Faeqji, Pedro e Cami">
+        <img class="align-center photo" :style="styleObj" src="{{theme.link}}/images/faeqji-pe-e-cami.jpg" alt="Faeqji, Pedro e Cami">
       </div>
       <div class="nine columns text-highlight">
         {{post.content}}

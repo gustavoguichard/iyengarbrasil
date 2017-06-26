@@ -5,12 +5,6 @@
 
   .acd-section {
     border: 1px solid $smoke;
-
-    &.active {
-      .acd-content {
-        display: block;
-      }
-    }
   }
 
   .active {
@@ -22,7 +16,6 @@
   .acd-header {
     border-left: 4px solid;
     color: $gray;
-    display: block;
     font-size: 1.2em;
     font-weight: 600;
     padding: .5em 1em;
@@ -47,28 +40,17 @@
     }
   }
 
-  &.mobile {
-    .acd-content {
-      display: none;
-    }
-  }
-
   &.desktop {
     box-shadow: none;
 
     .acd-header {
       border-left: none;
       border-top: 4px solid;
-      display: block;
     }
 
     .acd-section {
       display: inline-block;
       margin-right: -5px;
-    }
-
-    .acd-content {
-      display: none !important;
     }
   }
 }

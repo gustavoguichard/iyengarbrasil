@@ -3,12 +3,7 @@
 }
 
 .button.bt-cta {
-  visibility: hidden;
   font-size: 1em;
   height: auto;
   padding: .5em 1em;
-
-  .js & {
-    visibility: visible;
-  }
 }
