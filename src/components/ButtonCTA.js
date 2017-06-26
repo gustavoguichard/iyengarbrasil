@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import { scrollToElm } from '../utils/scroll'
 
 export default {
   selector: '.bt-cta',
