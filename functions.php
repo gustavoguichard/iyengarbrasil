@@ -318,14 +318,10 @@ function index_loop() {
 
 function images_array($post, $field) {
   $top_style = get_post_meta($post->id, 'top_style', true );
-  if($top_style == 'Imagem') {
-    return [TimberImage(post.get_field('top_image'))->src];
-  } else {
-    return array_map(
-      'timber_image_src',
-      acf_photo_gallery($field, $post->id)
-    );
-  }
+  return array_map(
+    'timber_image_src',
+    acf_photo_gallery($field, $post->id)
+  );
 }
 
 // =========================================================================
