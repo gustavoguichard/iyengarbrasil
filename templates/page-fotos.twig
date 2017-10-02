@@ -8,9 +8,15 @@
       <h3>{{evento.name}}</h3>
       {% for album in evento.get_posts %}
         <div class="album-wrapper">
-          <div class="album-cover photo" :style="styleObj"><a href="{{album.link}}"><img src="{{album.thumbnail.src}}"></a></div>
+          <div class="album-cover photo"><a href="{{album.link}}"><img src="{{album.thumbnail.src}}"></a></div>
         </div>
       {% endfor %}
+    {% endfor %}
+    {% for album in facebook_json.albums %}
+      <div class="album-wrapper">
+        <div class="album-cover photo"><a href="{{album.link}}"><img src="{{album.thumbnail.src}}"></a></div>
+        <h3>{{album.name}}</h3>
+      </div>
     {% endfor %}
   </article>
   {% include "page-bottom.twig" %}

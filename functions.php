@@ -288,7 +288,7 @@ class StarterSite extends TimberSite {
       $output .= '<a data-fancybox="gallery" data-caption="'. $caption .'" ';
       $output .= 'data-width="' . $width . '" ';
       $output .= 'data-height="' . $height . '" ';
-      $output .= 'href="' . $url . '"><img class="photo"  :style="styleObj" ';
+      $output .= 'href="' . $url . '"><img class="photo" ';
       $output .= 'src="'. $thumb . '" width="150" height="150" /></a>';
     }
 

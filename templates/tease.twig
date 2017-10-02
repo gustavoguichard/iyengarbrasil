@@ -3,9 +3,9 @@
     <a href="{{single.link}}"><h4 class="atv-title">{{single.title}}</h4></a>
     <a href="{{single.link}}">
       {% if single.object_type == 'term' %}
-        <img src="{{TimberImage(single.get_field('footer_image')).src('medium')}}" alt="{{single.title}}" class="photo atv-cover" :style="styleObj">
+        <img src="{{TimberImage(single.get_field('footer_image')).src('medium')}}" alt="{{single.title}}" class="photo atv-cover">
       {% else %}
-        <img src="{{single.thumbnail.src('medium')}}" alt="{{single.title}}" class="photo atv-cover" :style="styleObj">
+        <img src="{{single.thumbnail.src('medium')}}" alt="{{single.title}}" class="photo atv-cover">
       {% endif %}
     </a>
     <footer class="atv-info">{{single.get_field('top_subtitle')}}</footer>
