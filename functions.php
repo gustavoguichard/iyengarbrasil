@@ -96,13 +96,13 @@ class StarterSite extends TimberSite {
       wp_enqueue_style( 'iyengar_styles', get_template_directory_uri() . '/css/main.css' );
     }
 
-    if(is_single()) {
+    if(is_page_template('page-fotos.php')) {
       wp_enqueue_style( 'fancybox_styles', get_template_directory_uri() . '/js/vendor/jquery.fancybox.min.css' );
     }
   }
 
   function add_theme_scripts() {
-    if(is_single()) {
+    if(is_page_template('page-fotos.php')) {
       wp_enqueue_script( 'fancybox', get_template_directory_uri() . '/js/vendor/jquery.fancybox.min.js', ['jquery'], '1.0.0', true );
     }
 
@@ -147,68 +147,13 @@ class StarterSite extends TimberSite {
   }
 
   function register_post_types() {
-    $labels = array(
-      'name' => 'Álbums',
-      'singular_name' => 'Álbum',
-      'add_new' => 'Adicionar novo',
-      'add_new_item' => 'Adicionar Álbum',
-      'edit_item' => 'Editar Álbum',
-      'new_item' => 'Novo Álbum',
-      'view_item' => 'Ver Álbum',
-      'search_items' => 'Buscar Álbums',
-      'not_found' => 'Nenhum Álbum encontrado',
-      'not_found_in_trash' => 'Nenhum Álbum encontrado na lixeira',
-      'menu_name' => 'Álbums',
-    );
-
-    $args = array(
-      'labels' => $labels,
-      'hierarchical' => true,
-      'supports' => ['title', 'thumbnail'],
-      'public' => true,
-      'show_ui' => true,
-      'show_in_menu' => true,
-      'menu_position' => 5,
-      'menu_icon' => 'dashicons-camera',
-      'show_in_nav_menus' => false,
-      'exclude_from_search' => false,
-      'has_archive' => true,
-      'query_var' => true,
-      'can_export' => true,
-      'rewrite' => true,
-      'capability_type' => 'post'
-    );
-
-    register_post_type( 'album', $args );
   }
 
   function register_taxonomies() {
-    $labels = array(
-      'name' => 'Tipo de Evento',
-      'singular_name' => 'Tipo de Evento',
-      'search_items' => 'Buscar Tipos de Eventos',
-      'all_items' => 'Todos Tipos de Eventos',
-      'edit_item' => 'Editar Tipo de Evento',
-      'update_item' => 'Atualizar Tipo de Evento',
-      'add_new_item' => 'Adicionar novo Tipo de Evento',
-      'new_item_name' => 'Nome do novo Tipo de Evento',
-      'menu_name' => 'Tipo de Evento',
-    );
-
-    $args = array(
-      'hierarchical' => false,
-      'labels' => $labels,
-      'show_ui' => true,
-      'show_admin_column' => true,
-      'query_var' => true,
-      'rewrite' => array( 'slug' => 'evento' ),
-    );
-    register_taxonomy( 'evento', ['album'], $args );
   }
 
   function add_to_context( $context ) {
     $menu_name = is_front_page() ? 'home-main-menu' : 'main-menu';
-    $context['evento_terms'] = Timber::get_terms('evento', array('parent' => 0));
     $context['menu'] = new TimberMenu($menu_name);
     $context['site'] = $this;
     return $context;

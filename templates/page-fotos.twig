@@ -1,24 +1,41 @@
 {% extends partial ? "partial.twig" : "base.twig" %}
 
 {% block content %}
-  {% include "page-top.twig" %}
-  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
-    {{post.content}}
-    {% for evento in evento_terms %}
-      <h3>{{evento.name}}</h3>
-      {% for album in evento.get_posts %}
-        <div class="album-wrapper">
-          <div class="album-cover photo"><a href="{{album.link}}"><img src="{{album.thumbnail.src}}"></a></div>
-        </div>
-      {% endfor %}
+  {% if album_id %}
+    {% for album in albums %}
+      {% if album.id == album_id %}
+        <section class="sct-parallax main-header" :class="{ mobile: mobile }" data-main="{{not show_menu}}">
+          {% set first_five = album.images|slice(0, 5) %}
+          <slider images="{% for image in first_five %}{{ image.image }},{% endfor %}"></slider>
+          <div class="container">
+            <h1>{{album.name}}</h1>
+          </div>
+        </section>
+        <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+          {% for image in album.images %}
+            <a data-fancybox="gallery" data-caption="{{image.legend}}" href="{{image.image}}"><img class="photo" src="{{image.thumb}}"></a>
+          {% endfor %}
+        </article>
+      {% endif %}
     {% endfor %}
-    {% for album in facebook_json.albums %}
-      <div class="album-wrapper">
-        <div class="album-cover photo"><a href="{{album.link}}"><img src="{{album.thumbnail.src}}"></a></div>
-        <h3>{{album.name}}</h3>
-      </div>
-    {% endfor %}
-  </article>
+  {% else %}
+    {% include "page-top.twig" %}
+    <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+        {{post.content}}
+        {% for album in albums %}
+          {% if loop.index % 3 == 1 %}
+          <div class="row">
+          {% endif %}
+            <div class="one-third column atv-wrapper">
+              <div class="atv-cover photo"><a class="gallery-cover" href="{{ site.url }}/{{ post.slug }}?album_id={{album.id}}"><img src="{{album.cover.source}}"></a></div>
+              <footer class="atv-info">{{album.name}}</footer>
+            </div>
+          {% if (loop.index % 3 == 0 or loop.last) %}
+          </div>
+          {% endif %}
+        {% endfor %}
+    </article>
+  {% endif %}
   {% include "page-bottom.twig" %}
   {% include 'footer.twig' %}
 {% endblock %}
