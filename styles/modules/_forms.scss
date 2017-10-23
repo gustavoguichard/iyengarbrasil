@@ -1,0 +1,9 @@
+.nf-form-cont {
+  @media (max-width: 780px) {
+    .one-half, .three-sixths, .two-fourths {
+      float: none !important;
+      width: auto !important;
+      margin-left: 0 !important;
+    }
+  }
+}
