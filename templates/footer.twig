@@ -1,5 +1,7 @@
 {% if not partial %}
   <footer class="main-footer">
-    <copy>{{"now"|date('Y')}} – Centro Iyengar Yoga Florianópolis – iyengarbrasil.com</copy>
+    <copy>
+      {{"now"|date('Y')}} – {% if is_english %}Florianopolis Iyengar Yoga Center{% else %}Centro Iyengar Yoga Florianópolis{% endif %} – iyengarbrasil.com
+    </copy>
   </footer>
 {% endif %}

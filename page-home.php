@@ -17,7 +17,8 @@ if(current_user_can('publish_posts') && !isset($_SESSION['facebook_access_token'
 }
 $context = Timber::get_context();
 $post = new TimberPost();
-$sections = array_map('timber_post', ['atividades', 'horarios', 'contato']);
+$section_names = $context['is_english'] ? ['activities', 'schedule', 'contact'] : ['atividades', 'horarios', 'contato'];
+$sections = array_map('timber_post', $section_names);
 $context['sections'] = $sections;
 $context['post'] = $post;
 $context['posts'] = index_loop();
