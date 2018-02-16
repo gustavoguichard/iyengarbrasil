@@ -23,4 +23,4 @@ $context['post'] = $post;
 $context['posts'] = index_loop();
 $context['top_images'] = images_array($post, 'top_slider_images');
 $context['login_url'] = $loginUrl;
-Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+Timber::render( array( 'page-home.twig', 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );

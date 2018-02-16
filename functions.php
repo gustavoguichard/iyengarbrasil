@@ -151,6 +151,7 @@ class StarterSite extends TimberSite {
   function add_to_context( $context ) {
     $menu_name = is_front_page() ? 'home-main-menu' : 'main-menu';
     $context['menu'] = new TimberMenu($menu_name);
+    $context['is_english'] = get_locale() === 'en_US';
     $context['site'] = $this;
     return $context;
   }
