@@ -255,7 +255,7 @@ function timber_post($single) {
 }
 
 function index_loop() {
-  $args = 'post_type=post&numberposts=-1&orderby=date';
+  $args = 'post_type=post&numberposts=-1&orderby=date&lang=' . get_locale();
   $posts = Timber::get_posts($args);
   return $posts;
 }
