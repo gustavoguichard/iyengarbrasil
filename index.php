@@ -14,7 +14,8 @@
  */
 
 $context = Timber::get_context();
-$post = new TimberPost('atividades');
+$page_name = $context['is_english'] ? 'activities' : 'atividades';
+$post = new TimberPost($page_name);
 $context['post'] = $post;
 $context['posts'] = index_loop();
 $templates = array( 'index.twig' );
