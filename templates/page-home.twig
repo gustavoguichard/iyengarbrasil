@@ -28,7 +28,7 @@
   </article>
   {% include "page-bottom.twig" %}
   {% for section in sections %}
-    {% if section.slug == 'atividades' %}
+    {% if section.slug == 'atividades' or section.slug == 'activities' %}
       {% include ["index.twig", "page.twig"] with {'post': section, 'partial': true, 'posts': posts} %}
     {% else %}
       {% include ["page-"~section.name~".twig", "page.twig"] with {'post': section, 'partial': true} %}
