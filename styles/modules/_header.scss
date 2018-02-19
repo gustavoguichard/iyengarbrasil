@@ -41,7 +41,7 @@ $menu-font: 15px;
       background-color: rgba($gray-darker, .3);
     }
 
-    &.active, &.current-menu-item {
+    &.active, &.current-menu-item:not(.is-home-page) {
       background-color: $orange;
       color: white !important;
 

@@ -11,7 +11,7 @@
       {% block header %}
       <a href="#" class="menu-opener" @click.prevent="toggleMenu"><span class="hamburger"></span> Menu</a>
       <div class="container">
-        <a href="{{site.url}}" class="menu-logo img-replace">
+        <a href="{{site.url}}{% if is_english %}/en{% endif %}" class="menu-logo img-replace">
           <h1>{{site.name}}</h1>
         </a>
         {% include "menu.twig" with {'menu': menu.get_items} %}
