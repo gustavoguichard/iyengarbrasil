@@ -14,7 +14,7 @@
         <a href="{{site.url}}{% if is_english %}/en{% endif %}" class="menu-logo img-replace">
           <h1>{{site.name}}</h1>
         </a>
-        {% include "menu.twig" with {'menu': menu.get_items} %}
+        {% include "menu.twig" with {'menu': menu.get_items, 'is_header': true} %}
       </div>
       {% endblock %}
     </header>
