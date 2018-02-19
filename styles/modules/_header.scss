@@ -49,6 +49,10 @@ $menu-font: 15px;
         background-color: $yellow;
       }
     }
+
+    &.menu-language {
+      padding: 10px;
+    }
   }
 
   .list-menu {
@@ -117,6 +121,12 @@ $menu-font: 15px;
       width: 100%;
     }
   }
+}
+
+.flag-img {
+  max-width: 32px;
+  position: relative;
+  bottom: -2px;
 }
 
 .menu-logo {

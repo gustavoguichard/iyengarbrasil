@@ -13,6 +13,16 @@
     position: relative;
     text-align: center;
     z-index: 2;
+
+    .menu-language {
+      padding: 0px 10px;
+      position: relative;
+      bottom: -7px;
+
+      .flag-img {
+        bottom: -3px;
+      }
+    }
   }
 
   .logo {

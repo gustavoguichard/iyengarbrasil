@@ -5,5 +5,16 @@
       <a is="menu-link" class="{{item.classes | join(' ')}}" href="{{item.get_link}}" title="{{item.title}}" is-home="{{fn('is_front_page')}}">{{item.title}}</a>
 		</li>
 	{% endfor %}
+    <li class="menu-item-wp">
+    {% if is_english %}
+      <a class="menu-item menu-language" href="{{site.url}}/home" title="Português">
+        <img src="{{theme.link}}/images/flags/pt.png" alt="Bandeira Brasil" class="flag-img" />
+      </a>
+    {% else %}
+      <a class="menu-item menu-language" href="{{site.url}}/en" title="English">
+        <img src="{{theme.link}}/images/flags/en.png" alt="English Flag" class="flag-img" />
+      </a>
+    {% endif %}
+    </li>
 	</ul>
 {% endif %}
