@@ -83,4 +83,4 @@ $context['post'] = $post;
 $context['top_images'] = images_array($post, 'top_slider_images');
 $context['albums'] = get_albums_array();
 $context['album_id'] = $_GET['album_id'];
-Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+Timber::render( array( 'page-' . $post->post_name . '.twig', 'page-fotos.twig', 'page.twig' ), $context );
