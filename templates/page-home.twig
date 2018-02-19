@@ -9,7 +9,7 @@
       {% include "menu.twig" with {'menu': menu.get_items} %}
     </nav>
   </section>
-  <div id="centro" class="section-header no-margin">
+  <div id="{% if is_english %}center{% else %}centro{% endif %}" class="section-header no-margin">
     <div class="container">
       <h1 class="header-title">{{post.title}}</h1>
     </div>
