@@ -24,6 +24,16 @@
     }
   }
 
+  .nataraja {
+    bottom: -1em;
+    position: relative;
+    width: 100px;
+    @media (min-width: $tablet + 1) {
+      bottom: -3em;
+      width: 145px;
+    }
+  }
+
   .list-menu {
     margin: 0;
     position: relative;
