@@ -7,14 +7,6 @@
  * @since Iyengar Brasil 1.0
  */
 
-require_once(get_template_directory().'/facebook-settings.php');
-global $fb;
-if(current_user_can('publish_posts') && !isset($_SESSION['facebook_access_token']) && isset($fb)) {
-  $helper = $fb->getRedirectLoginHelper();
-  $_SESSION['FBRLH_state'] = $_GET['state'];
-  $permissions = ['email'];
-  $loginUrl = isset($_GET['facebook_data']) ? null : $helper->getLoginUrl(get_option('siteurl').'/login-callback/', $permissions);
-}
 $context = Timber::get_context();
 $post = new TimberPost();
 $section_names = $context['is_english'] ? ['activities', 'schedule', 'contact'] : ['atividades', 'horarios', 'contato'];
