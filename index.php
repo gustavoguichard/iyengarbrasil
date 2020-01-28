@@ -13,10 +13,14 @@
  * @since   Timber 0.1
  */
 
+ global $paged;
+if (!isset($paged) || !$paged){
+    $paged = 1;
+}
 $context = Timber::get_context();
-$page_name = $context['is_english'] ? 'activities' : 'atividades';
+$page_name = $context['is_english'] ? 'blog-en' : 'artigos';
 $context['post'] = new TimberPost($page_name);
-$context['posts'] = index_loop();
+$context['posts'] = index_loop('post', $paged);
 $templates = array( 'index.twig' );
 if ( is_home() ) {
 	array_unshift( $templates, 'home.twig' );

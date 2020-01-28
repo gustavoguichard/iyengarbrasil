@@ -1,0 +1,19 @@
+<div class="row article-tease">
+  {% if post.thumbnail %}
+    <div class="thumb">
+      <a href="{{post.link}}">
+        <img src="{{post.thumbnail.src('big')}}" alt="{{post.title}}" class="photo atv-cover">
+      </a>
+    </div>
+  {% endif %}
+  <div class="teaser-content">
+    <a href="{{post.link}}"><h3>{{post.title}}</h3></a>
+    <span class="teaser-info">
+      <span>Publicado em</span> <time datetime="{{ post.date|date('Y-m-d H:i:s') }}">{{ post.date }}</time>
+      {% if post.terms('post_tag') is not empty %}
+       <span>&bull; {{ post.terms('post_tag')|join(', ') }}</span>
+      {% endif %}
+    </span>
+    <p>{{post.preview.length(35).read_more('Continuar lendo')}}</p>
+  </div>
+</div>

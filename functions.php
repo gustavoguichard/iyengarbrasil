@@ -28,13 +28,17 @@ class StarterSite extends TimberSite {
     add_filter('post_gallery', [$this, 'parse_gallery_shortcode'], 10, 2);
     add_filter( 'wp_default_scripts', [$this, 'dequeue_jquery_migrate']);
     add_action('init', [$this, 'iyengar_unregister_tags']);
-    add_action( 'init', [$this, 'change_post_object_label']);
-    add_action( 'admin_menu', [$this, 'change_post_menu_label']);
+    // add_action( 'init', [$this, 'change_post_object_label']);
+    // add_action( 'admin_menu', [$this, 'change_post_menu_label']);
     add_action( 'init', [$this, 'register_post_types']);
     add_action( 'init', [$this, 'register_taxonomies']);
     add_action( 'admin_menu', [$this, 'remove_menus']);
     add_action( 'wp_enqueue_scripts', [$this, 'add_theme_styles']);
     add_action( 'wp_enqueue_scripts', [$this, 'add_theme_scripts']);
+
+    // Add custom post to main query
+    add_action('pre_get_posts', [$this, 'custom_post_cat_filter']);
+
     add_shortcode('painel', [$this, 'accordeon_cb']);
     add_shortcode('aba', [$this, 'accordeon_section_cb']);
     add_shortcode('video', [$this, 'video_cb']);
@@ -48,7 +52,8 @@ class StarterSite extends TimberSite {
   }
 
   function iyengar_unregister_tags() {
-    unregister_taxonomy_for_object_type('post_tag', 'post');
+    unregister_taxonomy_for_object_type('category', 'post');
+    unregister_taxonomy_for_object_type('post_tag', 'atividade');
   }
 
   function wpex_fix_shortcodes($content){
@@ -118,14 +123,22 @@ class StarterSite extends TimberSite {
     return (substr( $url, 0, 16 ) === "http://localhost");
   }
 
-  function change_post_menu_label() {
-    global $menu;
-    global $submenu;
-    $menu[5][0] = 'Atividades';
-    $submenu['edit.php'][5][0] = 'Atividades';
-    $submenu['edit.php'][10][0] = 'Adicionar Atividades';
-    echo '';
+  function custom_post_cat_filter($query) {
+    if ( !is_admin() && $query->is_main_query() ) {
+      if ($query->is_category()) {
+        $query->set( 'post_type', array( 'post', 'atividade' ) );
+      }
+    }
   }
+
+  // function change_post_menu_label() {
+  //   global $menu;
+  //   global $submenu;
+  //   $menu[5][0] = 'Atividades';
+  //   $submenu['edit.php'][5][0] = 'Atividades';
+  //   $submenu['edit.php'][10][0] = 'Adicionar Atividades';
+  //   echo '';
+  // }
 
   function change_post_object_label() {
     global $wp_post_types;
@@ -133,13 +146,13 @@ class StarterSite extends TimberSite {
     $labels->name = 'Atividades';
     $labels->singular_name = 'Atividade';
     $labels->add_new = 'Adicionar Atividade';
-    $labels->add_new_item = 'Adicionar Atividade';
-    $labels->edit_item = 'Editar Atividades';
-    $labels->new_item = 'Atividade';
-    $labels->view_item = 'Ver Atividade';
-    $labels->search_items = 'Buscar Atividades';
-    $labels->not_found = 'Nenhuma Atividade encontrada';
-    $labels->not_found_in_trash = 'Nenhuma Atividade na Lixeira';
+  //   $labels->add_new_item = 'Adicionar Atividade';
+  //   $labels->edit_item = 'Editar Atividades';
+  //   $labels->new_item = 'Atividade';
+  //   $labels->view_item = 'Ver Atividade';
+  //   $labels->search_items = 'Buscar Atividades';
+  //   $labels->not_found = 'Nenhuma Atividade encontrada';
+  //   $labels->not_found_in_trash = 'Nenhuma Atividade na Lixeira';
   }
 
   function register_post_types() {
@@ -253,10 +266,18 @@ function timber_post($single) {
   return new TimberPost($single);
 }
 
-function index_loop() {
+function index_loop($post_type = 'post', $paged = 1) {
   $lang = explode('_', get_locale())[0];
-  $args = 'post_type=post&numberposts=-1&orderby=date&lang='.$lang;
-  $posts = Timber::get_posts($args);
+  $args = $post_type == 'atividade' ? array(
+    'post_type' => 'atividade',
+    'numberposts' => '-1',
+    'orderby' => 'date',
+    'lang' => $lang
+  ) : array(
+    'post_type' => 'post',
+    'paged' => $paged
+  );
+  $posts = new Timber\PostQuery($args);
   return $posts;
 }
 
@@ -273,15 +294,16 @@ function images_array($post, $field) {
 // =========================================================================
 remove_action('wp_head', 'rsd_link'); // remove really simple discovery link
 remove_action('wp_head', 'wp_generator'); // remove wordpress version
-remove_action('wp_head', 'feed_links', 2); // remove rss feed links (make sure you add them in yourself if youre using feedblitz or an rss service)
+// remove_action('wp_head', 'feed_links', 2); // remove rss feed links (make sure you add them in yourself if youre using feedblitz or an rss service)
 remove_action('wp_head', 'feed_links_extra', 3); // removes all extra rss feed links
-remove_action('wp_head', 'index_rel_link'); // remove link to index page
+// remove_action('wp_head', 'index_rel_link'); // remove link to index page
 remove_action('wp_head', 'wlwmanifest_link'); // remove wlwmanifest.xml (needed to support windows live writer)
 remove_action('wp_head', 'start_post_rel_link', 10, 0); // remove random post link
 remove_action('wp_head', 'parent_post_rel_link', 10, 0); // remove parent post link
 remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // remove the next and previous post links
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0 );
+
 // all actions related to emojis
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );

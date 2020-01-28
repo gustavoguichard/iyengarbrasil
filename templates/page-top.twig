@@ -2,6 +2,11 @@
   <div id="{{post.slug}}" class="section-header">
     <div class="container">
       <h1 class="header-title">{{post.title}}</h1>
+      {% if post.post_type == 'post' %}
+        <h4 class="published-date">
+          <time datetime="{{ post.date|date('Y-m-d H:i:s') }}">{{ post.date }}</time>
+        </h4>
+      {% endif %}
     </div>
   </div>
 {% else %}
@@ -9,7 +14,11 @@
     <slider images="{{top_images|join(',')}}"></slider>
     <div class="container">
       <h1>{{post.title}}</h1>
-      {% if post.get_field('top_subtitle') %}
+      {% if post.post_type == 'post' %}
+        <h4 class="published-date">
+          <time datetime="{{ post.date|date('Y-m-d H:i:s') }}">{{ post.date }}</time>
+        </h4>
+      {% elseif post.get_field('top_subtitle') %}
         <h4>{{post.get_field('top_subtitle')}}</h4>
       {% endif %}
     </div>

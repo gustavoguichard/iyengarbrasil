@@ -27,10 +27,21 @@
       </div>
     </section>
   </article>
+  <div id="artigos" class="section-header">
+    <div class="container">
+      <h1 class="header-title">Últimos Artigos</h1>
+    </div>
+  </div>
+  <div class="post-wrapper container">
+    {% for post in posts | slice(0,2) %}
+      {% include "article-tease.twig" with {'post': post} %}
+    {% endfor %}
+    <a class="button button-primary" href="/artigos/">Ver Blog</a>
+  </div>
   {% include "page-bottom.twig" %}
   {% for section in sections %}
     {% if section.slug == 'atividades' or section.slug == 'activities' %}
-      {% include ["index.twig", "page.twig"] with {'post': section, 'partial': true, 'posts': posts} %}
+      {% include "page-activities.twig" with {'post': section, 'partial': true, 'posts': activities} %}
     {% else %}
       {% include ["page-"~section.name~".twig", "page.twig"] with {'post': section, 'partial': true} %}
     {% endif %}

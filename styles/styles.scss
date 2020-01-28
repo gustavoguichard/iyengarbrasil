@@ -1,23 +1,24 @@
-@import './settings/variables';
-@import './settings/normalize';
+@import "./settings/variables";
+@import "./settings/normalize";
 
 // Global
-@import './global/skeleton';
-@import './global/general';
-@import './global/responsive';
-@import './global/typo';
+@import "./global/skeleton";
+@import "./global/general";
+@import "./global/responsive";
+@import "./global/typo";
 
 // Modules
-@import './modules/accordeon';
-@import './modules/content';
-@import './modules/cta-section';
-@import './modules/footer';
-@import './modules/header';
-@import './modules/parallax';
-@import './modules/photos';
-@import './modules/table';
-@import './modules/forms';
+@import "./modules/accordeon";
+@import "./modules/content";
+@import "./modules/cta-section";
+@import "./modules/footer";
+@import "./modules/header";
+@import "./modules/parallax";
+@import "./modules/photos";
+@import "./modules/table";
+@import "./modules/forms";
 
 // Pages
-@import './pages/home';
-@import './pages/atividades';
+@import "./pages/home";
+@import "./pages/atividades";
+@import "./pages/artigos";

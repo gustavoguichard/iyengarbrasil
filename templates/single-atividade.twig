@@ -2,7 +2,7 @@
 
 {% block content %}
   {% include "page-top.twig" %}
-  <article class="container content-section single-post post-type-{{post.post_type}}" id="post-{{post.ID}}">
+  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
     {{post.content}}
     {% if post.get_field('cta_text') %}
       <p><a href="#" @click.prevent="clicked" v-if="show" class="button button-primary bt-cta">{{post.get_field('cta_text')}}</a></p>
