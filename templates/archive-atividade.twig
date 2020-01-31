@@ -1,0 +1,20 @@
+{% extends partial ? "partial.twig" : "base.twig" %}
+
+{% block content %}
+  {% include "page-top.twig" %}
+  <article class="container content-section post-type-{{post.post_type}}" id="post-{{post.ID}}">
+    {{post.content}}
+    {% for single in posts %}
+      {% if loop.index % 3 == 1 %}
+        <div class="row">
+      {% endif %}
+      {% include 'tease.twig' with {'post': single} %}
+      {% if (loop.index % 3 == 0 or loop.last) %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+  </article>
+  {% include "page-bottom.twig" %}
+  {% include 'footer.twig' %}
+{% endblock %}
